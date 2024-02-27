@@ -1,0 +1,63 @@
+.sidebar-holder {
+  min-width: 20%;
+  height: 100vh;
+  background-color: white;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20%;
+}
+
+.logo-sidebar-holder {
+  font-family: Poppins;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+  color: #2b3674;
+  font-weight: 700;
+  font-size: 25px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.sidebar-menu-holder {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-option-sidebar {
+  margin: 8px 0 0 16px;
+  display: flex;
+  gap: 1rem;
+  color: #a3aed0;
+  font-size: large;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.logout-button-holder {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex: 1;
+  margin-bottom: 3rem;
+}
+
+.logout-button-holder > button {
+  width: 70%;
+  background-color: #4318ff;
+  color: white;
+  border-radius: 10px;
+  font-size: 16px;
+  padding: 8px 0;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}

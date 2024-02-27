@@ -10,13 +10,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./login.css";
-import logo from "../../../assets/logo.svg";
-import SignupModal from "../../modals/signUModal";
-
+// import logo from "../../../assets/logo.svg";
+// import SignupModal from "../../modals/signUModal";
 library.add(faEye);
 
 function Login() {
-  const navigate = useNavigate();
+  //   const navigate = useNavigate();
   const countryCodeOptions = useMemo(() => countryList().getData(), []);
   const [loginOrSignUp, setloginOrSignUp] = useState("login");
   const [showSignUpModal, setshowSignUpModal] = useState(false);
@@ -24,18 +23,14 @@ function Login() {
     loginUserId: "",
     loginPassword: "",
   });
-
   const [loginError, setLoginError] = useState({
     userIdError: false,
     passwordError: false,
   });
-
   useEffect(() => {
     console.log({ countryCodeOptions });
   }, []);
-
   const [showingPassword, setShowPassword] = useState(false);
-
   const toastConfig = {
     position: "bottom-right",
     autoClose: 2000,
@@ -46,7 +41,6 @@ function Login() {
     progress: undefined,
     theme: "dark",
   };
-
   const signUpFormIkInitialValues = {
     consumerId: "",
     billNumber: "",
@@ -59,10 +53,9 @@ function Login() {
     address: "",
     confirmPassword: "",
   };
-
   const validationSignUpSchema = Yup.object({
     consumerId: Yup.number().required("Please enter the Consumer Id"),
-    billNumber: Yup.number().required("Please enter valid  number"),
+    billNumber: Yup.number().required("Please enter valid number"),
     title: Yup.string().required("Please choose a title"),
     customerName: Yup.string().required("Please enter your name"),
     email: Yup.string()
@@ -77,73 +70,47 @@ function Login() {
       .oneOf([Yup.ref("password"), null], "passwords must match")
       .required("Please confirm password"),
   });
-
   const signUpSubmitHandler = (values) => {
     console.log("submited", values);
   };
-
   const loginSubmitHandler = (e) => {
     e.preventDefault();
     if (!loginData.loginUserId) {
-      //empty user ID
-      setLoginError({
-        ...loginError,
-        userIdError: true,
-      });
+      setLoginError({ ...loginError, userIdError: true });
       return;
     }
     if (!loginData.loginPassword) {
-      //empty user ID
-      setLoginError({
-        ...loginError,
-        passwordError: true,
-      });
+      setLoginError({ ...loginError, passwordError: true });
       return;
     }
-
     if (loginData.loginUserId.length != 13) {
-      setLoginError({
-        ...loginError,
-        userIdError: true,
-      });
+      setLoginError({ ...loginError, userIdError: true });
       return;
     }
-
     if (loginData.loginUserId == "1234567899999") {
       toast.error("No user exist for this user ID", toastConfig);
       console.log({ loginData });
       return;
     }
-
     toast.success("Login Successful", toastConfig);
-    setTimeout(() => {
-      navigate("/");
-    }, 1500);
+    // setTimeout(() => {
+    //   navigate("/");
+    // }, 1500);
   };
-
   return (
     <>
-           {" "}
       <div className="loginPage-holder-css">
-               {" "}
         {loginOrSignUp === "login" ? (
           <div className="login-page-part-css" style={{ minWidth: "60%" }}>
-                       {" "}
             <div className="login-form-heading-holder">
-                            <span>LOGIN</span>             {" "}
-              <p>Take a minute to Login to have a seamless experience!</p>     
-                   {" "}
+              <span>LOGIN</span>
+              <p>Take a minute to Login to have a seamless experience!</p>
             </div>
-                       {" "}
             <form className="login-form-holder-css">
-                           {" "}
               <div className="login-form-fields-holder">
-                               {" "}
                 <label htmlFor="loginUserId" className="form-label">
-                                    User ID                  {" "}
-                  <span style={{ color: "#4318FF" }}>*</span>               {" "}
+                  User ID <span style={{ color: "#4318FF" }}>*</span>
                 </label>
-                               {" "}
                 <input
                   style={{ position: "relative" }}
                   type="text"
@@ -162,31 +129,21 @@ function Login() {
                         loginUserId: e.target.value,
                       });
                     }
-                    setLoginError({
-                      ...loginError,
-                      userIdError: false,
-                    });
+                    setLoginError({ ...loginError, userIdError: false });
                   }}
                 />
-                               {" "}
                 {loginError.userIdError ? (
                   <div className="error-message">
-                                        Please enter valid User ID              
-                       {" "}
+                    Please enter valid User ID
                   </div>
                 ) : (
                   ""
                 )}
-                             {" "}
               </div>
-                           {" "}
               <div className="login-form-fields-holder">
-                               {" "}
                 <label htmlFor="loginPassword" className="form-label">
-                                    Password                  {" "}
-                  <span style={{ color: "#4318FF" }}>*</span>               {" "}
+                  Password <span style={{ color: "#4318FF" }}>*</span>
                 </label>
-                               {" "}
                 <input
                   style={{ position: "relative" }}
                   type={showingPassword ? "text" : "password"}
@@ -201,13 +158,9 @@ function Login() {
                       loginPassword: e.target.value.trim(),
                     });
                     setShowPassword(false);
-                    setLoginError({
-                      ...loginError,
-                      passwordError: false,
-                    });
+                    setLoginError({ ...loginError, passwordError: false });
                   }}
                 />
-                               {" "}
                 {showingPassword ? (
                   <FontAwesomeIcon
                     icon={faEyeSlash}
@@ -235,51 +188,43 @@ function Login() {
                     }}
                   />
                 )}
-                               {" "}
                 {loginError.passwordError ? (
                   <div
                     className="error-message"
                     style={{ marginTop: "0.3rem" }}
                   >
-                                        Please enter password                  {" "}
+                    Please enter password
                   </div>
                 ) : (
                   ""
                 )}
-                               {" "}
                 <div
                   className="form-labels"
                   onClick={() => {
                     setloginOrSignUp("signup");
                   }}
                 >
-                                    Don't have an account?                {" "}
+                  Don't have an account?
                 </div>
-                             {" "}
               </div>
-                           {" "}
               <button
                 type="submit"
                 onClick={(e) => loginSubmitHandler(e)}
                 className="btn login-button-loginPage"
               >
-                                Login              {" "}
+                Login
               </button>
-                         {" "}
             </form>
-                     {" "}
           </div>
         ) : (
           <div className="signUp-form-holder" style={{ minWidth: "60%" }}>
-                       {" "}
             <div
               className="login-form-heading-holder"
               style={{ width: "61%", marginBottom: "1.5rem" }}
             >
-                            <span>SIGN UP</span>             {" "}
-              <p style={{ margin: "0" }}>Welcome to KSEB!</p>           {" "}
+              <span>SIGN UP</span>
+              <p style={{ margin: "0" }}>Welcome to KSEB!</p>
             </div>
-                       {" "}
             <Formik
               initialValues={signUpFormIkInitialValues}
               validationSchema={validationSignUpSchema}
@@ -289,20 +234,13 @@ function Login() {
                 setshowSignUpModal(true);
               }}
             >
-                           {" "}
               {({ values, handleChange, resetForm, errors, touched }) => (
                 <Form className="formik-holder-css">
-                                   {" "}
                   <div className="signup-form-row-holder">
-                                       {" "}
                     <div className="signup-form-text-field-holder">
-                                           {" "}
                       <label htmlFor="consumerId" className="form-label">
-                                                Consumer Id{" "}
-                        <span style={{ color: "#4318FF" }}>*</span>             
-                               {" "}
+                        Consumer Id <span style={{ color: "#4318FF" }}>*</span>
                       </label>
-                                           {" "}
                       <Field
                         className=" login-form-inputs form-control "
                         type="text"
@@ -321,21 +259,12 @@ function Login() {
                               : "",
                         }}
                       />
-                                           {" "}
-                      {/* {errors.consumerId && touched.consumerId ? (
-                        <span>{errors.consumerId}</span>
-                      ) : null} */}
-                                         {" "}
+                      {/* {errors.consumerId && touched.consumerId ? ( <span>{errors.consumerId}</span> ) : null} */}
                     </div>
-                                       {" "}
                     <div className="signup-form-text-field-holder">
-                                           {" "}
                       <label htmlFor="billNumber" className="form-label">
-                                                Bill No.{" "}
-                        <span style={{ color: "#4318FF" }}>*</span>             
-                               {" "}
+                        Bill No. <span style={{ color: "#4318FF" }}>*</span>
                       </label>
-                                           {" "}
                       <Field
                         className=" login-form-inputs form-control "
                         type="text"
@@ -354,29 +283,21 @@ function Login() {
                               : "",
                         }}
                       />
-                                         {" "}
                     </div>
-                                     {" "}
                   </div>
-                                   {" "}
                   <div
                     className="signup-form-row-holder"
                     style={{ gap: "0.5rem !important" }}
                   >
-                                       {" "}
                     <div>
-                                           {" "}
                       <label htmlFor="title" className="form-label">
-                                                Title{" "}
-                        <span style={{ color: "#4318FF" }}>*</span>             
-                               {" "}
+                        Title <span style={{ color: "#4318FF" }}>*</span>
                       </label>
-                                           {" "}
                       <select
                         name="title"
                         id="title"
                         onChange={handleChange}
-                        className=" login-form-inputs form-control  title-select-option"
+                        className=" login-form-inputs form-control title-select-option"
                         value={values.title}
                         style={{
                           border:
@@ -385,23 +306,16 @@ function Login() {
                               : "",
                         }}
                       >
-                                                <option value="Mr.">Mr.</option>
-                                               {" "}
-                        <option value="Mrs.">Mrs.</option>                     
-                          <option value="Miss.">Miss.</option>                 
-                           {" "}
+                        <option value="Mr.">Mr.</option>
+                        <option value="Mrs.">Mrs.</option>
+                        <option value="Miss.">Miss.</option>
                       </select>
-                                         {" "}
                     </div>
-                                       {" "}
                     <div style={{ width: "80%" }}>
-                                           {" "}
                       <label htmlFor="customerName" className="form-label">
-                                                Customer Name                  
-                              <span style={{ color: "#4318FF" }}>*</span>       
-                                     {" "}
+                        Customer Name
+                        <span style={{ color: "#4318FF" }}>*</span>
                       </label>
-                                           {" "}
                       <Field
                         className=" login-form-inputs form-control "
                         type="text"
@@ -423,21 +337,13 @@ function Login() {
                               : "",
                         }}
                       />
-                                         {" "}
                     </div>
-                                     {" "}
                   </div>
-                                   {" "}
                   <div className="signup-form-row-holder">
-                                       {" "}
                     <div>
-                                           {" "}
                       <label htmlFor="email" className="form-label">
-                                                Email{" "}
-                        <span style={{ color: "#4318FF" }}>*</span>             
-                               {" "}
+                        Email <span style={{ color: "#4318FF" }}>*</span>
                       </label>
-                                           {" "}
                       <Field
                         className=" login-form-inputs form-control "
                         type="text"
@@ -453,23 +359,12 @@ function Login() {
                               : "",
                         }}
                       />
-                                         {" "}
                     </div>
-                                       {" "}
-                    {/* </div>
-                  <div
-                    className="signup-form-row-holder"
-                    style={{ gap: "0.5rem !important" }}
-                  > */}
-                                       {" "}
+                    {/* </div> <div className="signup-form-row-holder" style={{ gap: "0.5rem !important" }} > */}
                     <div style={{ height: "fit-content" }}>
-                                           {" "}
                       <label htmlFor="phonenumber" className="form-label">
-                                                Phone number{" "}
-                        <span style={{ color: "#4318FF" }}>*</span>             
-                               {" "}
+                        Phone number <span style={{ color: "#4318FF" }}>*</span>
                       </label>
-                                           {" "}
                       <div
                         style={{
                           display: "flex",
@@ -477,21 +372,12 @@ function Login() {
                           gap: "10px",
                         }}
                       >
-                                               {" "}
-                        {/* <Select
-                          isMulti={false}
-                          options={options}
-                          value={values.countryCode}
-                          onChange={(e) => {
-                            console.log(e);
-                          }}
-                        /> */}
-                                               {" "}
+                        {/* <Select isMulti={false} options={options} value={values.countryCode} onChange={(e) => { console.log(e); }} /> */}
                         <select
                           name="countryCode"
                           id="countryCode"
                           onChange={handleChange}
-                          className=" login-form-inputs form-control  title-select-option"
+                          className=" login-form-inputs form-control title-select-option"
                           value={values.countryCode}
                           style={{
                             border:
@@ -500,18 +386,13 @@ function Login() {
                                 : "",
                           }}
                         >
-                                                   {" "}
                           {countryCodeOptions.map((item) => {
                             return (
                               <option value={item.value}>{item.label}</option>
                             );
                           })}
-                                                 {" "}
                         </select>
-                                               {" "}
-                        {/* </div>
-                    <div style={{ width: "80%" }}> */}
-                                               {" "}
+                        {/* </div> <div style={{ width: "80%" }}> */}
                         <Field
                           className=" login-form-inputs form-control "
                           type="text"
@@ -533,23 +414,14 @@ function Login() {
                                 : "",
                           }}
                         />
-                                             {" "}
                       </div>
-                                         {" "}
                     </div>
-                                     {" "}
                   </div>
-                                   {" "}
                   <div>
-                                       {" "}
                     <div>
-                                           {" "}
                       <label htmlFor="address" className="form-label">
-                                                Address{" "}
-                        <span style={{ color: "#4318FF" }}>*</span>             
-                               {" "}
+                        Address <span style={{ color: "#4318FF" }}>*</span>
                       </label>
-                                           {" "}
                       <Field
                         className=" login-form-inputs form-control "
                         type="text"
@@ -565,21 +437,13 @@ function Login() {
                               : "",
                         }}
                       />
-                                         {" "}
                     </div>
-                                     {" "}
                   </div>
-                                   {" "}
                   <div className="signup-form-row-holder">
-                                       {" "}
                     <div className="signup-form-text-field-holder">
-                                           {" "}
                       <label htmlFor="password" className="form-label">
-                                                Password{" "}
-                        <span style={{ color: "#4318FF" }}>*</span>             
-                               {" "}
+                        Password <span style={{ color: "#4318FF" }}>*</span>
                       </label>
-                                           {" "}
                       <Field
                         className=" login-form-inputs form-control "
                         type="password"
@@ -601,17 +465,12 @@ function Login() {
                               : "",
                         }}
                       />
-                                         {" "}
                     </div>
-                                       {" "}
                     <div className="signup-form-text-field-holder">
-                                           {" "}
                       <label htmlFor="confirmPassword" className="form-label">
-                                                Confirm Password                
-                                <span style={{ color: "#4318FF" }}>*</span>     
-                                       {" "}
+                        Confirm Password
+                        <span style={{ color: "#4318FF" }}>*</span>
                       </label>
-                                           {" "}
                       <Field
                         className=" login-form-inputs form-control "
                         type="password"
@@ -627,21 +486,16 @@ function Login() {
                               : "",
                         }}
                       />
-                                         {" "}
                     </div>
-                                     {" "}
                   </div>
-                                   {" "}
                   <div
                     className="form-labels"
                     onClick={() => {
                       setloginOrSignUp("login");
                     }}
                   >
-                                        Already have an account?                
-                     {" "}
+                    Already have an account?
                   </div>
-                                   {" "}
                   <div
                     className="signup-form-row-holder"
                     style={{
@@ -649,55 +503,43 @@ function Login() {
                       flexDirection: "row-reverse",
                     }}
                   >
-                                       {" "}
                     <button
                       className="btn login-button-loginPage"
                       type="submit"
                     >
-                                            Register                    {" "}
+                      Register
                     </button>
-                                       {" "}
                     <button
                       className="btn reset-button-signUPForm"
                       onClick={resetForm}
                       type="button"
                     >
-                                            Reset                    {" "}
+                      Reset
                     </button>
-                                     {" "}
                   </div>
-                                 {" "}
                 </Form>
               )}
-                         {" "}
             </Formik>
-                     {" "}
           </div>
         )}
-               {" "}
         <div className="login-page-part-css right-side">
-                   {" "}
           <div
             className="img-center image-logo-holder"
             style={{ display: "flex", flexDirection: "column" }}
           >
-                       {" "}
-            <img
+            {/* <img
               src={logo}
               width="50px"
               className="img-fluid"
               alt="website-logo"
               title="KSEB"
-            />
-                        <h1>KSEB</h1>         {" "}
+            /> */}
+            <h1>KSEB</h1>
           </div>
-                 {" "}
         </div>
-             {" "}
       </div>
-            <ToastContainer />
-           {" "}
-      <SignupModal
+      <ToastContainer />
+      {/* <SignupModal
         showModal={showSignUpModal}
         onHide={() => {
           setshowSignUpModal(false);
@@ -706,10 +548,8 @@ function Login() {
           setshowSignUpModal(false);
           setloginOrSignUp("login");
         }}
-      />
-         {" "}
+      /> */}
     </>
   );
 }
-
 export default Login;

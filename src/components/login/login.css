@@ -1,0 +1,141 @@
+a {
+  text-decoration: none;
+}
+.loginPage-holder-css {
+  display: flex;
+}
+.login-page-part-css {
+  /* min-width: 50%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.login-form-heading-holder > span {
+  color: #2b3674;
+  font-weight: 800;
+  font-size: 30px;
+}
+.login-form-heading-holder > p {
+  color: #a3aed0;
+  border-bottom: 1px solid #e0e5f2;
+  margin: 0.3rem 0 0 0;
+}
+.image-logo-holder {
+  display: flex;
+  justify-content: center;
+}
+.login-form-holder-css {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.btn {
+  /* margin-left: 35px; */
+  width: 150px;
+}
+.fields {
+  /* border: 1px solid rgb(172, 172, 172); */
+  width: 350px;
+}
+.form-label {
+  font-weight: bold;
+  color: #2b3674;
+}
+.login-form-inputs {
+  border-radius: 16px !important;
+  padding: 10px 15px !important;
+}
+.login-button-loginPage {
+  background-color: #4318ff !important;
+  border: none;
+  color: white !important;
+  width: 35%;
+}
+.form-control:focus {
+  border-color: rgba(0, 0, 0, 0.556) !important;
+  box-shadow: none !important; /* border: none !important; */
+}
+.login-form-fields-holder > label {
+  cursor: pointer;
+}
+.error-message {
+  color: red;
+  position: absolute; /* right: 57%; */
+  padding-left: 5px;
+  font-size: smaller;
+}
+.form-labels {
+  margin-top: 0.3rem;
+  color: blue;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+}
+.right-side {
+  flex: 1;
+  background: linear-gradient(
+    to top,
+    rgba(58, 48, 242) 0%,
+    rgba(67, 67, 229) 45%,
+    rgb(238, 211, 253) 100%
+  ); /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  border-bottom-left-radius: 100px;
+  color: white; /* text-align: end; */
+}
+.img-center {
+  justify-content: center;
+  align-items: center; /* margin-top: 30%; */
+  flex: 1; /* margin-left: 47%; */
+}
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+.h-custom {
+  height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+  .h-custom {
+    height: 100%;
+  }
+} /* sign up form css */
+.signUp-form-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.signup-form-text-field-holder {
+  width: 47%;
+}
+.title-select-option {
+  max-width: 80px;
+}
+.signup-form-row-holder {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+.formik-holder-css {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 60%;
+}
+.reset-button-signUPForm {
+  background-color: #80808078 !important;
+  color: black !important;
+  width: 25%;
+  border: none;
+}
