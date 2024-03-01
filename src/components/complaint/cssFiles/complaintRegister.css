@@ -1,0 +1,53 @@
+.bill-heading-color {
+  background-color: rgb(0, 183, 255);
+  font-weight: 800;
+  color: white;
+}
+.bills-fileds {
+  border: none;
+}
+.complaint-form-content {
+  /* row-gap: 40px; */
+  margin-bottom: 20px;
+}
+.complaint-labels {
+  font-weight: bold;
+  margin-bottom: 5px;
+
+  /* font-style: bold; */
+}
+.captcha-complaint {
+  box-shadow: inset 0 0 10px;
+  font-weight: bolder;
+  text-align: center;
+  /* border-top:  1px solid #ccc;
+          transform: skew(-30deg); */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  user-select: none;
+}
+.main-heading {
+  font-weight: bolder;
+  color: rgb(0, 140, 255);
+}
+.star-color {
+  color: rgb(255, 0, 0);
+}
+textarea {
+  resize: none;
+}
+
+.register-complaint-button-holder {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.register-complaint-buttons {
+  font-size: small !important;
+}
+
+.complaint-register-holder {
+  border-radius: 20px;
+  padding: 1rem;
+  margin-bottom: 7%;
+}

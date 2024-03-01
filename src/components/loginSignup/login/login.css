@@ -1,6 +1,7 @@
 a {
   text-decoration: none;
 }
+
 .loginPage-holder-css {
   display: flex;
 }
@@ -14,6 +15,7 @@ a {
   flex-wrap: wrap;
   gap: 2rem;
 }
+
 .login-form-heading-holder > span {
   color: #2b3674;
   font-weight: 800;
@@ -46,6 +48,7 @@ a {
   font-weight: bold;
   color: #2b3674;
 }
+
 .login-form-inputs {
   border-radius: 16px !important;
   padding: 10px 15px !important;
@@ -58,14 +61,16 @@ a {
 }
 .form-control:focus {
   border-color: rgba(0, 0, 0, 0.556) !important;
-  box-shadow: none !important; /* border: none !important; */
+  box-shadow: none !important;
+  /* border: none !important; */
 }
 .login-form-fields-holder > label {
   cursor: pointer;
 }
 .error-message {
   color: red;
-  position: absolute; /* right: 57%; */
+  position: absolute;
+  /* right: 57%; */
   padding-left: 5px;
   font-size: smaller;
 }
@@ -83,17 +88,21 @@ a {
     rgba(58, 48, 242) 0%,
     rgba(67, 67, 229) 45%,
     rgb(238, 211, 253) 100%
-  ); /* display: flex; */
+  );
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   height: 100vh;
   border-bottom-left-radius: 100px;
-  color: white; /* text-align: end; */
+  color: white;
+  /* text-align: end; */
 }
 .img-center {
   justify-content: center;
-  align-items: center; /* margin-top: 30%; */
-  flex: 1; /* margin-left: 47%; */
+  align-items: center;
+  /* margin-top: 30%; */
+  flex: 1;
+  /* margin-left: 47%; */
 }
 .divider:after,
 .divider:before {
@@ -109,7 +118,10 @@ a {
   .h-custom {
     height: 100%;
   }
-} /* sign up form css */
+}
+
+/* sign up form css  */
+
 .signUp-form-holder {
   display: flex;
   justify-content: center;
@@ -119,6 +131,7 @@ a {
 .signup-form-text-field-holder {
   width: 47%;
 }
+
 .title-select-option {
   max-width: 80px;
 }
@@ -127,12 +140,14 @@ a {
   gap: 0.5rem;
   align-items: flex-end;
 }
+
 .formik-holder-css {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   max-width: 60%;
 }
+
 .reset-button-signUPForm {
   background-color: #80808078 !important;
   color: black !important;
