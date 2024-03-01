@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./dashboard.css";
 import Lottie from "lottie-react";
-import DashboardProfileAnimation from "../../assets/animations/Animation - 1706339793428.json";
+// import DashboardProfileAnimation from "../../assets/animations/Animation - 1706339793428.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faRupeeSign,

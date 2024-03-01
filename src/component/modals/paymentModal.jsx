@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import "../modals/ModalsCssFiles/paymentModal.css";
+import "./ModalsCssFiles/paymentModal.css";
 import Lottie from "lottie-react";
 import paymentAnnimation from "../../assets/animations/arrowPaymentAnnimation.json";
 import { Formik, Form, Field } from "formik";
