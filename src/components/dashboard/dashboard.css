@@ -1,0 +1,146 @@
+.dashboard-holder {
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  /* padding: 1rem; */
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.main-dashboard-heading {
+  color: #2b3674;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.user-area-holder > span {
+  color: #05cd99;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.main-header-right-side-dashboard {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  padding: 5px 15px;
+  border-radius: 17px;
+  align-items: inherit;
+  gap: 0.5rem;
+}
+
+.main-header-right-side-dashboard > div > span {
+  padding: 5px 20px;
+  background-color: #bcbcbc;
+  border-radius: 15px;
+  font-size: large;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.animation-holder-dashboard-header {
+  width: 65px;
+}
+
+.dashboard-card-holders {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  margin: 0 1rem;
+}
+
+.card-dashboard {
+  border-radius: 20px;
+  width: max-content;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 6rem 1rem 1.5rem;
+  gap: 1rem;
+  margin: 1rem 0;
+  /* cursor: pointer; */
+}
+
+.card-content-holder > p {
+  color: #a3aed0;
+  margin: 0;
+}
+
+.card-content-holder > span {
+  color: #2b3674;
+  font-weight: 700;
+  font-size: large;
+}
+
+.card-logo-holder {
+  padding: 1rem;
+  border-radius: 50%;
+  background-color: #bcbcbc5e;
+  color: #4318ff;
+}
+
+.main-yearly-news-holder-dashboard {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  padding: 0 1rem;
+  margin: 1rem 0;
+}
+
+.main-yearly-news-holder-dashboard > div {
+  height: 300px;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  padding: 2rem;
+}
+
+.yearly-chart-holder-dashboard {
+  flex: 0 0 60%;
+}
+
+.news-showholder-dashboard {
+  flex: 1;
+}
+
+.monthly-bill-dashboard-holder {
+  background-color: white;
+  border-radius: 20px;
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  flex-direction: column;
+}
+.monthly-bill-dashboard-holder > span {
+  font-size: large;
+  font-weight: 700;
+}
+.monthly-expenses-holder {
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: space-around;
+  border: 0.5px solid lightgrey;
+  border-radius: 20px;
+}
+
+.monthly-expenses-holder span:nth-child(2),
+.monthly-expenses-holder span:nth-child(1) {
+  font-weight: bold;
+}
+
+.monthly-expenses-holder span:nth-child(3) {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.monthly-expenses-holder span:nth-child(4) {
+  color: #a3aed0;
+}

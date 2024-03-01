@@ -1,0 +1,19 @@
+.heading-payment-successful-modal {
+  font-size: x-large;
+  font-weight: 600;
+}
+
+.content-holder-payment-successful {
+  text-align: center;
+  font-size: large;
+  color: rgb(45, 45, 45);
+  font-weight: 500;
+}
+
+.content-holder-payment-successful > span {
+  color: black;
+}
+.login-button-holder {
+  margin-top: 1rem;
+  text-align: center;
+}

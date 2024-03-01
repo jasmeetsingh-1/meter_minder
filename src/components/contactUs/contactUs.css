@@ -1,0 +1,103 @@
+.main-outer-div-contactUs {
+  background-color: white;
+  margin: 2rem 0;
+  border-radius: 10px;
+}
+
+.header-of-contactUs {
+  background-color: black;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: white;
+  padding-bottom: 2rem;
+}
+
+.heading-holder-contactUs {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.heading-holder-contactUs > span {
+  width: fit-content;
+}
+
+.heading-holder-contactUs span:nth-child(1) {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: x-large;
+}
+
+.header-of-contactUs span:nth-child(2) {
+  color: #c9c9c9;
+  /* font-size: larger; */
+}
+
+.contact-detials-section-header-contactUS {
+  display: flex;
+  justify-content: space-around;
+}
+
+.contact-detials-section-header-contactUS > div {
+  display: flex;
+  gap: 0.5rem;
+  color: #c9c9c9;
+}
+
+.contactUs-form {
+  padding: 0 2rem 0.3rem;
+}
+
+.subject-options-holder {
+  display: flex;
+  gap: 2rem;
+  align-content: center;
+  flex-wrap: wrap;
+  padding: 0.5rem 0;
+}
+
+.subject-options-holder > div {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.row-contactUs-form > div > label {
+  color: rgba(0, 0, 0, 0.829);
+  font-weight: 600;
+  font-size: large;
+}
+
+.row-contactUs-form > div > input {
+  outline: none;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #8d8d8d86;
+}
+
+.row-contactUs-form > div > input:focus {
+  border-bottom: 1px solid black;
+}
+
+.button-holder-contactUS button:nth-child(2) {
+  font-family: Poppins;
+  background-color: black;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 12px;
+}
+.button-holder-contactUS button:nth-child(1) {
+  border: none;
+  outline: none;
+  background: transparent;
+  text-decoration: underline;
+  font-size: larger;
+  font-family: Poppins;
+}
+
+.button-holder-contactUS {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}

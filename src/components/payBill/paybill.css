@@ -1,0 +1,85 @@
+.header-paybill {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 20px;
+  padding: 1rem 1.5rem;
+  margin: 1rem;
+}
+.header-paybill > div {
+  width: max-content;
+  font-weight: 900;
+}
+
+.header-paybill > div > span,
+.details-card-paybill > span {
+  color: #a3aed0;
+  font-weight: 600;
+}
+
+.card-paybill {
+  border-radius: 20px;
+  width: 49%;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 6rem 1rem 1.5rem;
+  flex-direction: column;
+}
+
+.card-paybill > span {
+  font-weight: 900;
+}
+
+.card-paybill > p {
+  margin: 0;
+}
+
+.details-card-paybill {
+  font-weight: 700;
+}
+
+.cost-table-holder-paybill {
+  width: 96.5%;
+  background-color: white;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  margin: 1rem;
+}
+
+.bill-table-paybill {
+  width: 100%;
+}
+
+.bill-table-paybill tr {
+  /* border-bottom: 1px solid lightgray; */
+  text-align: center;
+}
+
+.bill-table-paybill td,
+.bill-table-paybill th {
+  padding: 1rem 0;
+  text-align: right;
+}
+.bill-table-paybill > tbody > tr > td:nth-child(1) {
+  text-align: left;
+  font-size: large;
+}
+.bill-table-paybill > thead {
+  font-size: larger;
+  border-bottom: 1px solid lightgrey;
+}
+
+.payment-card-paybill {
+  cursor: pointer;
+  box-shadow: 1px 1px 1px;
+}
+
+.payment-card-holders-paybill {
+  border-radius: 20px;
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}

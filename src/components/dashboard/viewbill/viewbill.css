@@ -1,0 +1,147 @@
+.view-bill-main-holder {
+  background-color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 10px;
+  margin: 1rem;
+}
+
+.view-bill-header {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.2rem 0;
+  padding: 0 2rem;
+}
+
+.view-bill-header div:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.view-bill-header div:nth-child(1) > span {
+  font-family: Poppins;
+  color: #2b3674;
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.view-bill-header div:nth-child(2) {
+  color: #5e6470;
+  display: flex;
+  align-items: center;
+}
+
+.view-bill-header > div {
+  width: fit-content;
+}
+
+.billed-to-address {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+  color: #5e6470;
+}
+
+.table-heading-view-bill > div {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.table-heading-view-bill {
+  display: flex;
+  gap: 1rem;
+  /* padding: 1rem; */
+}
+
+.table-heading-view-bill {
+  background-color: #3598f32e;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.left-div-inner-table,
+.right-div-inner-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.left-div-inner-table > input,
+.right-div-inner-table > input {
+  background-color: transparent;
+  border: none;
+  width: fit-content;
+  font-weight: 800;
+  color: black;
+}
+
+.left-div-inner-table > label,
+.right-div-inner-table > label {
+  color: #5e6470;
+}
+
+.bill-table-viewBill > thead {
+  font-size: medium;
+  border-bottom: 1px solid lightgrey;
+  color: #5e6470;
+}
+
+.cost-table-holder-viewBill {
+  background-color: white;
+  border-left: 1px solid #3598f32e;
+  border-right: 1px solid #3598f32e;
+  border-bottom: 1px solid #3598f32e;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.sub-table-view-bill td:nth-child(3) {
+  text-align: center;
+}
+
+.sub-table-view-bill td:nth-child(3),
+.sub-table-view-bill td:nth-child(4) {
+  background-color: #3598f32e;
+}
+
+.viewBill-table-body > tr > td:nth-child(1) {
+  padding-left: 1rem;
+}
+
+.viewBill-table-body > tr > td:nth-child(4) {
+  padding-right: 1rem;
+}
+
+.last-col-viewBill-special {
+  background-color: #3598f3 !important;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.total-amount-in-Words-holder {
+  text-align: right;
+  color: #5e6470;
+  padding: 1rem 5rem;
+}
+
+.footer-view-bill-portion {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 25px;
+  margin-top: 10rem;
+  color: grey;
+}
+
+.footer-view-bill-portion div:nth-child(2) {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-view-bill-portion div:nth-child(2) > span {
+  cursor: pointer;
+}
+
+.footer-view-bill-portion div:nth-child(2) span:nth-child(2) {
+  border-left: 1px solid grey;
+  padding-left: 1rem;
+}

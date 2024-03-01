@@ -1,0 +1,56 @@
+.heading-div-deleteComplaint-modal {
+  text-align: center;
+  font-size: larger;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.delete-modal-heading {
+  text-align: center;
+  font-size: medium;
+}
+
+.modal-body-deleteComplaint {
+  padding: 0 2rem 1rem !important;
+}
+
+.warning-div-deleteComplaint {
+  border-left: 5px solid #fa703f;
+  background-color: #ffe9d9;
+  padding: 0.5rem 1rem;
+}
+
+.warning-div-deleteComplaint div:nth-child(1) {
+  color: #771505;
+  font-weight: 600;
+  display: flex;
+  gap: 0.2rem;
+  font-size: large;
+}
+.warning-div-deleteComplaint div:nth-child(2) {
+  color: #bc4c2e;
+}
+
+.button-deleteComplaint-modal {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.button-deleteComplaint-modal > button {
+  outline: none;
+  padding: 0.5rem;
+  font-weight: 700 !important;
+}
+
+.button-deleteComplaint-modal button:nth-child(1) {
+  background-color: #101f20;
+  color: white;
+  border: 1px solid #101f20;
+}
+.button-deleteComplaint-modal button:nth-child(2) {
+  background-color: white;
+  color: #101f20;
+  border: 1px solid #101f20;
+}
