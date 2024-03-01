@@ -2,7 +2,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import Lottie from "lottie-react";
 import paymentSuccessful from "../../assets/animations/paymentSuccessful.json";
-import "./ModalsCssFiles/paymentSucessfulModal.css";
+import "./ModalsCssFiles/paymentSuccessfulModal.css";
 import { useNavigate } from "react-router";
 
 function PaymentSuccessfullModal({ showModal, onHide, setmenuSelected }) {

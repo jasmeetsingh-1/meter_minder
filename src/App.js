@@ -8,7 +8,7 @@ import PayBill from "./component/payBill/paybill";
 import Sidebar from "./component/sidebar/sidebar";
 import ComplaintStatus from "./component/complaint/complaintStatus";
 import Profile from "./component/profile/profile";
-import SampleChart from "./component/sampleChart/sampleChart";
+// import SampleChart from "./component/sampleChart/sampleChart";
 import ContactUs from "./component/contactUs/contactUs";
 
 function App() {
@@ -44,7 +44,7 @@ function App() {
           }
         />
         <Route exact path="/login" element={<Login />} />
-        <Route exact path="/graph" element={<SampleChart />} />
+        {/* <Route exact path="/graph" element={<SampleChart />} /> */}
       </Routes>
 
       {/* <Login /> */}
@@ -53,40 +53,3 @@ function App() {
 }
 
 export default App;
-
-
-
-.app-holder {
-  /* display: flex; */
-  margin: 0px;
-  font-family: DM sans;
-  /* font-family: Poopins; */
-}
-
-* {
-  box-sizing: border-box;
-}
-body,
-html {
-  margin: 0;
-  padding: 0;
-}
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
-:root {
-  scroll-behavior: smooth;
-}
-
-.dashboard-login-holder {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.website-main-component-holder {
-  width: 80%;
-  background-color: rgb(209 208 208 / 59%);
-  padding: 1rem;
-  min-height: 100vh;
-}
-

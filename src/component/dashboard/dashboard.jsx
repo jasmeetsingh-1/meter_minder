@@ -9,9 +9,9 @@ import {
   faBoltLightning,
 } from "@fortawesome/free-solid-svg-icons";
 import Header from "../header";
-import SampleChart from "../sampleChart/sampleChart";
+// import SampleChart from "../sampleChart/sampleChart";
 import { useNavigate } from "react-router";
-import ViewBill from "./viewbill/viewbil";
+import ViewBill from "./viewbill/viewbill";
 
 function Dashboard() {
   const navigate = useNavigate();
