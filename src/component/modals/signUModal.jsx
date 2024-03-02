@@ -36,14 +36,15 @@ function SignupModal({ showModal, onHide, loginButtonClicked }) {
               width="50px"
               className="img-fluid"
               alt="website-logo"
-              title="KSEB"
+              title="meterMinder"
             />
-            <h1>KSEB</h1>
+            <h1>Meter Minder</h1>
           </div>
           <p className="signup-modal-heading">Sign Up Successful</p>
           <div className="signup-modal-content">
             <span>
-              Welcome to KSEB! Kindly note down the user Id for future logins.
+              Welcome to Meter Minder! Kindly note down the user Id for future
+              logins.
             </span>
             <div className="signup-modal-userId-holder">
               User id:{" "}

@@ -18,8 +18,13 @@ function ViewBill({ month }) {
     <div className="view-bill-main-holder">
       <div className="view-bill-header">
         <div>
-          <img src={logo} />
-          <span>KSEB</span>
+          <img
+            src={logo}
+            width="50px"
+            title="website-logo"
+            alt="website-logo"
+          />
+          <span>Meter Minder</span>
         </div>
         <div>
           <span>
