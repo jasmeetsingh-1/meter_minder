@@ -52,6 +52,7 @@ a {
 .login-form-inputs {
   border-radius: 16px !important;
   padding: 10px 15px !important;
+  width: 100%;
 }
 .login-button-loginPage {
   background-color: #4318ff !important;
@@ -85,9 +86,9 @@ a {
   flex: 1;
   background: linear-gradient(
     to top,
-    rgba(58, 48, 242) 0%,
+    rgb(41 36 116) 0%,
     rgba(67, 67, 229) 45%,
-    rgb(238, 211, 253) 100%
+    rgb(164 140 178) 100%
   );
   /* display: flex; */
   justify-content: center;

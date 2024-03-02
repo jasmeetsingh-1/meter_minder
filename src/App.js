@@ -46,8 +46,6 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         {/* <Route exact path="/graph" element={<SampleChart />} /> */}
       </Routes>
-
-      {/* <Login /> */}
     </div>
   );
 }

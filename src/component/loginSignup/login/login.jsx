@@ -30,10 +30,6 @@ function Login() {
     passwordError: false,
   });
 
-  useEffect(() => {
-    console.log({ countryCodeOptions });
-  }, []);
-
   const [showingPassword, setShowPassword] = useState(false);
 
   const toastConfig = {
@@ -169,13 +165,15 @@ function Login() {
                   ""
                 )}
               </div>
-              <div className="login-form-fields-holder">
+              <div
+                className="login-form-fields-holder"
+                style={{ position: "relative" }}
+              >
                 <label htmlFor="loginPassword" className="form-label">
                   Password
                   <span style={{ color: "#4318FF" }}>*</span>
                 </label>
                 <input
-                  style={{ position: "relative" }}
                   type={showingPassword ? "text" : "password"}
                   className=" login-form-inputs form-control fields"
                   id="loginPassword"
@@ -199,8 +197,8 @@ function Login() {
                     icon={faEyeSlash}
                     style={{
                       position: "absolute",
-                      bottom: "36.5%",
-                      right: "57.5%",
+                      bottom: "42.5%",
+                      right: "2%",
                       cursor: "pointer",
                     }}
                     onClick={() => {
@@ -212,8 +210,8 @@ function Login() {
                     icon={faEye}
                     style={{
                       position: "absolute",
-                      bottom: "36.5%",
-                      right: "57.5%",
+                      bottom: "42.5%",
+                      right: "2%",
                       cursor: "pointer",
                     }}
                     onClick={() => {
