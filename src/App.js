@@ -12,7 +12,7 @@ import Profile from "./component/profile/profile";
 import ContactUs from "./component/contactUs/contactUs";
 
 function App() {
-  const [menuSelected, setmenuSelected] = useState(6);
+  const [menuSelected, setmenuSelected] = useState(1);
   return (
     <div className="app-holder">
       <Routes>

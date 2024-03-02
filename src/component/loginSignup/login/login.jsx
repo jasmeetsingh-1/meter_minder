@@ -258,7 +258,7 @@ function Login() {
               style={{ width: "61%", marginBottom: "1.5rem" }}
             >
               <span>SIGN UP</span>
-              <p style={{ margin: "0" }}>Welcome to KSEB!</p>
+              <p style={{ margin: "0" }}>Welcome to Meter Minder!</p>
             </div>
             <Formik
               initialValues={signUpFormIkInitialValues}
@@ -583,9 +583,9 @@ function Login() {
               width="50px"
               className="img-fluid"
               alt="website-logo"
-              title="KSEB"
+              title="meterMinder"
             />
-            <h1>KSEB</h1>
+            <h1>Meter Minder</h1>
           </div>
         </div>
       </div>

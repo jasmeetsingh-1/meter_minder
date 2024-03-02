@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import logo from "../../assets/logo.svg";
 import "./sidebar.css";
 
 function Sidebar({ menuSelected, setmenuSelected }) {
@@ -12,7 +13,8 @@ function Sidebar({ menuSelected, setmenuSelected }) {
           setmenuSelected(1);
         }}
       >
-        Kerala State Electricity Board
+        <img src={logo} width="50px" alt="webiste-logo" ttile="website-logo" />
+        Meter Minder
       </div>
 
       <div className="sidebar-menu-holder">
