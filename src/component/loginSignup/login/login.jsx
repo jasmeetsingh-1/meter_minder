@@ -69,7 +69,13 @@ function Login() {
     password: Yup.string()
       .required("Please enter password")
       .min(8, "Password must be 8 characters long")
-      .max(30, "Password can be at max 30 digits"),
+      .max(30, "Password can be at max 30 digits")
+      .matches(/[0-9]/, "Password must contain at least one number")
+      .matches(/[A-Z]/, "Password must contain at least one capital letter")
+      .matches(
+        /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/,
+        "Password must contain at least one special character"
+      ),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "passwords must match")
       .required("Please confirm password"),
