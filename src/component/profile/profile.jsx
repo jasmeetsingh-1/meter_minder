@@ -70,14 +70,6 @@ function Profile() {
   };
 
   //  Calling an API
-  useEffect(() => {
-    try {
-      const response = axios.get("https://jsonplaceholder.typicode.com/posts");
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }, []);
 
   return (
     <>
