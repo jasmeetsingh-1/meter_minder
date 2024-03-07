@@ -12,11 +12,15 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./login.css";
 import logo from "../../../assets/logo.svg";
 import SignupModal from "../../modals/signUModal";
+import { useDispatch, useSelector } from "react-redux";
+import { signUpReducers } from "../../redux-store/store";
 
 library.add(faEye);
 
 function Login() {
   const navigate = useNavigate();
+  const dispatcher = useDispatch();
+  const signUpStore = useSelector((state) => state.signupStore.signupdata);
   const countryCodeOptions = useMemo(() => countryList().getData(), []);
   const [loginOrSignUp, setloginOrSignUp] = useState("login");
   const [showSignUpModal, setshowSignUpModal] = useState(false);
@@ -51,7 +55,7 @@ function Login() {
     email: "",
     countryCode: "",
     password: "",
-    phonenumber: "",
+    phoneNumber: "",
     address: "",
     confirmPassword: "",
   };
@@ -81,7 +85,42 @@ function Login() {
       .required("Please confirm password"),
   });
 
-  const signUpSubmitHandler = (values) => {
+  const checkingIfAlreadyUser = (signUpFormData, email, phoneNumber) => {
+    //return false -> user doesnt exist
+    let flag = "nothing";
+    signUpFormData.map((item) => {
+      if (item.email == email) {
+        flag = "email";
+        return;
+      }
+      if (item.phoneNumber == phoneNumber) {
+        flag = "Phone Number";
+        return;
+      }
+    });
+
+    return flag;
+  };
+
+  const signUpSubmitHandler = (values, resetForm) => {
+    if (
+      checkingIfAlreadyUser(signUpStore, values.email, values.phoneNumber) ==
+      "nothing"
+    ) {
+      console.log("user doesnt exist");
+      dispatcher(signUpReducers.signupButtonHandlerReducer(values));
+      resetForm();
+      setshowSignUpModal(true);
+    } else {
+      toast.error(
+        `User exist with the given ${checkingIfAlreadyUser(
+          signUpStore,
+          values.email,
+          values.phoneNumber
+        )}`,
+        toastConfig
+      );
+    }
     console.log("submited", values);
   };
 
@@ -268,9 +307,8 @@ function Login() {
               initialValues={signUpFormIkInitialValues}
               validationSchema={validationSignUpSchema}
               onSubmit={(values, { resetForm }) => {
-                console.log({ values });
-                resetForm();
-                setshowSignUpModal(true);
+                signUpSubmitHandler(values, resetForm);
+                // console.log({ values });
               }}
             >
               {({ values, handleChange, resetForm, errors, touched }) => (
@@ -408,7 +446,7 @@ function Login() {
                     style={{ gap: "0.5rem !important" }}
                   > */}
                     <div style={{ height: "fit-content" }}>
-                      <label htmlFor="phonenumber" className="form-label">
+                      <label htmlFor="phoneNumber" className="form-label">
                         Phone number <span style={{ color: "#4318FF" }}>*</span>
                       </label>
                       <div
@@ -451,9 +489,9 @@ function Login() {
                           className=" login-form-inputs form-control "
                           type="text"
                           placeholder="Enter your Phone Number"
-                          name="phonenumber"
-                          id="phonenumber"
-                          value={values.phonenumber}
+                          name="phoneNumber"
+                          id="phoneNumber"
+                          value={values.phoneNumber}
                           onKeyPress={(e) => {
                             if (
                               !/^[0-9]*$/.test(e.key) ||
@@ -463,7 +501,7 @@ function Login() {
                           }}
                           style={{
                             border:
-                              errors.phonenumber && touched.phonenumber
+                              errors.phoneNumber && touched.phoneNumber
                                 ? "1px solid red"
                                 : "",
                           }}
