@@ -13,11 +13,11 @@ import "./login.css";
 import logo from "../../../assets/logo.svg";
 import SignupModal from "../../modals/signUModal";
 import { useDispatch, useSelector } from "react-redux";
-import { signUpReducers } from "../../redux-store/store";
+import { signUpReducers, loginReducers } from "../../redux-store/store";
 
 library.add(faEye);
 
-function Login() {
+function LoginPage() {
   const navigate = useNavigate();
   const dispatcher = useDispatch();
   const signUpStore = useSelector((state) => state.signupStore.signupdata);
@@ -28,6 +28,7 @@ function Login() {
     loginUserId: "",
     loginPassword: "",
   });
+  const [userId, setUserId] = useState("");
 
   const [loginError, setLoginError] = useState({
     userIdError: false,
@@ -50,14 +51,31 @@ function Login() {
   const signUpFormIkInitialValues = {
     consumerId: "",
     billNumber: "",
-    title: "",
+    title: "Mr.",
     customerName: "",
     email: "",
-    countryCode: "",
+    countryCode: "IN",
     password: "",
     phoneNumber: "",
     address: "",
     confirmPassword: "",
+  };
+
+  const currentDate = new Date();
+
+  const samplePendingBill = {
+    billingAddress: "",
+    unitsUsed: "67",
+    startDate: new Date(),
+    endDate: new Date(currentDate.setMonth(currentDate.getMonth() + 1)),
+    dueDate: new Date(currentDate.setDate(currentDate.getDate() + 15)), //end date + 15
+    inVoiceNumber: "#AB2324-01",
+    invoiceDate: new Date(
+      new Date().setDate(currentDate.getDate() + 3, new Date().getMonth() + 1)
+    ), //ending date+3
+    invoiceTotal: 67 * 10,
+    totalAmount: 67 * 10, //bill amount+additionalExpenses
+    additionalExpenses: [],
   };
 
   const validationSignUpSchema = Yup.object({
@@ -102,13 +120,33 @@ function Login() {
     return flag;
   };
 
+  function getRandom(length) {
+    return Math.floor(
+      Math.pow(10, length - 1) +
+        Math.random() * 9 * Math.pow(10, length - 1).toString()
+    );
+  }
+
   const signUpSubmitHandler = (values, resetForm) => {
+    console.log({ values });
     if (
       checkingIfAlreadyUser(signUpStore, values.email, values.phoneNumber) ==
       "nothing"
     ) {
       console.log("user doesnt exist");
-      dispatcher(signUpReducers.signupButtonHandlerReducer(values));
+
+      const payload = {
+        ...values,
+        userId: getRandom(13),
+        pendingBills: [
+          {
+            ...samplePendingBill,
+          },
+        ],
+        paidBills: [],
+      };
+      setUserId(payload.userId);
+      dispatcher(signUpReducers.signupButtonHandlerReducer(payload));
       resetForm();
       setshowSignUpModal(true);
     } else {
@@ -121,7 +159,29 @@ function Login() {
         toastConfig
       );
     }
-    console.log("submited", values);
+  };
+
+  const loginValidator = (loginData) => {
+    let flag = "No User with the given User ID.";
+    signUpStore.map((item) => {
+      if (item.userId == loginData.loginUserId) {
+        if (item.password == loginData.loginPassword) {
+          flag = "loginSuccessful";
+          dispatcher(
+            loginReducers.loginButtonHandlerReducers({
+              status: true,
+              userdata: item,
+            })
+          );
+          return;
+        } else {
+          flag = "Incorrect Password";
+          return;
+        }
+      }
+    });
+
+    return flag;
   };
 
   const loginSubmitHandler = (e) => {
@@ -135,7 +195,7 @@ function Login() {
       return;
     }
     if (!loginData.loginPassword) {
-      //empty user ID
+      //empty password
       setLoginError({
         ...loginError,
         passwordError: true,
@@ -151,16 +211,15 @@ function Login() {
       return;
     }
 
-    if (loginData.loginUserId == "1234567899999") {
-      toast.error("No user exist for this user ID", toastConfig);
-      console.log({ loginData });
+    if (loginValidator(loginData) == "loginSuccessful") {
+      toast.success("Login Successful", toastConfig);
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+    } else {
+      toast.error(`${loginValidator(loginData)}`, toastConfig);
       return;
     }
-
-    toast.success("Login Successful", toastConfig);
-    setTimeout(() => {
-      navigate("/");
-    }, 1500);
   };
 
   return (
@@ -456,14 +515,6 @@ function Login() {
                           gap: "10px",
                         }}
                       >
-                        {/* <Select
-                          isMulti={false}
-                          options={options}
-                          value={values.countryCode}
-                          onChange={(e) => {
-                            console.log(e);
-                          }}
-                        /> */}
                         <select
                           name="countryCode"
                           id="countryCode"
@@ -472,7 +523,7 @@ function Login() {
                           value={values.countryCode}
                           style={{
                             border:
-                              errors.title && touched.title
+                              errors.countryCode && touched.countryCode
                                 ? "1px solid red"
                                 : "",
                           }}
@@ -634,6 +685,7 @@ function Login() {
       <ToastContainer />
       <SignupModal
         showModal={showSignUpModal}
+        userId={userId}
         onHide={() => {
           setshowSignUpModal(false);
         }}
@@ -646,4 +698,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;

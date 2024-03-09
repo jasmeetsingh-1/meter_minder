@@ -3,16 +3,16 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import ComplaintRegister from "./component/complaint/complaintRegister";
 import Dashboard from "./component/dashboard/dashboard";
-import Login from "./component/loginSignup/login/login";
 import PayBill from "./component/payBill/paybill";
 import Sidebar from "./component/sidebar/sidebar";
 import ComplaintStatus from "./component/complaint/complaintStatus";
 import Profile from "./component/profile/profile";
 // import SampleChart from "./component/sampleChart/sampleChart";
 import ContactUs from "./component/contactUs/contactUs";
+import LoginPage from "./component/loginSignup/login/login";
 
 function App() {
-  const [menuSelected, setmenuSelected] = useState(1);
+  const [sideMenuState, setSideMenuState] = useState(3);
   return (
     <div className="app-holder">
       <Routes>
@@ -21,29 +21,29 @@ function App() {
           element={
             <div className="dashboard-login-holder">
               <Sidebar
-                menuSelected={menuSelected}
-                setmenuSelected={setmenuSelected}
+                sideMenuState={sideMenuState}
+                setSideMenuState={setSideMenuState}
               />
               <div className="website-main-component-holder">
-                {menuSelected === 1 ? <Dashboard /> : ""}
-                {menuSelected === 2 ? (
-                  <PayBill setmenuSelected={setmenuSelected} />
+                {sideMenuState === 1 ? <Dashboard /> : ""}
+                {sideMenuState === 2 ? (
+                  <PayBill setSideMenuState={setSideMenuState} />
                 ) : (
                   ""
                 )}
-                {menuSelected === 3 ? (
-                  <ComplaintRegister setmenuSelected={setmenuSelected} />
+                {sideMenuState === 3 ? (
+                  <ComplaintRegister setSideMenuState={setSideMenuState} />
                 ) : (
                   ""
                 )}
-                {menuSelected === 4 ? <ComplaintStatus /> : ""}
-                {menuSelected === 5 ? <Profile /> : ""}
-                {menuSelected === 6 ? <ContactUs /> : ""}
+                {sideMenuState === 4 ? <ComplaintStatus /> : ""}
+                {sideMenuState === 5 ? <Profile /> : ""}
+                {sideMenuState === 6 ? <ContactUs /> : ""}
               </div>
             </div>
           }
         />
-        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/login" element={<LoginPage />} />
         {/* <Route exact path="/graph" element={<SampleChart />} /> */}
       </Routes>
     </div>

@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import CopyToClipboard from "react-copy-to-clipboard";
 import copyLogo from "../../assets/copy-svgrepo-com.svg";
 
-function SignupModal({ showModal, onHide, loginButtonClicked }) {
+function SignupModal({ showModal, onHide, loginButtonClicked, userId }) {
   const toastConfig = {
     position: "bottom-right",
     autoClose: 3000,
@@ -48,13 +48,13 @@ function SignupModal({ showModal, onHide, loginButtonClicked }) {
             </span>
             <div className="signup-modal-userId-holder">
               User id:{" "}
-              <CopyToClipboard text="124567891234">
+              <CopyToClipboard text={userId}>
                 <span
                   onClick={() => {
                     toast.success("User Id copied", toastConfig);
                   }}
                 >
-                  124567891234
+                  {userId}
                   <img
                     src={copyLogo}
                     width="15px"
@@ -64,9 +64,10 @@ function SignupModal({ showModal, onHide, loginButtonClicked }) {
               </CopyToClipboard>
             </div>
           </div>
-          <div style={{ textAlign: "center" }}>
+          <div style={{ display: "flex", justifyContent: "center" }}>
             <button
               className="btn signup-form-loginButton"
+              style={{ display: "flex", justifyContent: "center" }}
               onClick={loginButtonClicked}
             >
               Login

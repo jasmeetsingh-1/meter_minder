@@ -1,8 +1,32 @@
+import { Field, Form, Formik } from "formik";
 import React from "react";
 import Header from "../header";
 import "./contactUs.css";
+import * as Yup from "yup";
 
 function ContactUs() {
+  const contactUsFormInitials = {
+    firstName: "",
+    lastName: "",
+    emailContactUs: "",
+    phoneNumberContactUs: "",
+    subjectContactUs: "",
+    extraCommentContactUs: "",
+  };
+
+  const contactUsValdationSchema = Yup.object({
+    firstName: Yup.string().required("Please enter your firstName"),
+    lastName: Yup.string().required("Please enter your lastName"),
+    emailContactUs: Yup.string()
+      .email("Enter valid Email")
+      .required("Please enter email"),
+    phoneNumberContactUs: Yup.string()
+      .required("Please enter Phone Number")
+      .min(10, "Phone number must be 10 Digits")
+      .max(10, "Phone number must be 10 Digits"),
+    subjectContactUs: Yup.string().required("Please choose Subject"),
+  });
+
   return (
     <>
       <Header heading={"Contact Us"} />
@@ -65,92 +89,149 @@ function ContactUs() {
             </div>
           </div>
         </div>
-        <div className="contactUs-form">
-          <div className="container">
-            <div className="row my-5 row-contactUs-form">
-              <div className="col-6">
-                <label htmlFor="firstName" className="label-color-change">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  className="form-control from-text-fileds"
-                />
-              </div>
-              <div className="col-6">
-                <label htmlFor="">Last Name</label>
-                <input type="text" className="form-control from-text-fileds" />
-              </div>
-            </div>
-            <div className="row row-contactUs-form">
-              <div className="col-6">
-                <label htmlFor="">Email</label>
-                <input type="text" className="form-control from-text-fileds" />
-              </div>
-              <div className="col-6">
-                <label htmlFor="">Phone Number</label>
-                <input type="text" className="form-control from-text-fileds" />
-              </div>
-            </div>
-            <div className="row my-5 row-contactUs-form">
-              <div>
-                <label htmlFor="subject">Select Subject?</label>
-                <div className="subject-options-holder">
-                  <div>
-                    <input
-                      type="radio"
-                      id="option1"
-                      value="option1"
-                      name="subject"
-                    />
-                    <label htmlFor="option1">Option 1</label>
+
+        <Formik
+          initialValues={contactUsFormInitials}
+          validationSchema={contactUsValdationSchema}
+          // onSubmit={contactUsFormOnSubmitHandler}
+          onSubmit={(values) => {
+            console.log({ values });
+          }}
+        >
+          {({ values }) => (
+            <Form>
+              <div className="contactUs-form">
+                <div className="container">
+                  <div className="row my-5 row-contactUs-form">
+                    <div className="col-6">
+                      <label htmlFor="firstName" className="label-color-change">
+                        First Name
+                      </label>
+                      <Field
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        className="form-control from-text-fileds"
+                        value={values.firstName}
+                      />
+                    </div>
+                    <div className="col-6">
+                      <label htmlFor="">Last Name</label>
+                      <Field
+                        type="text"
+                        className="form-control from-text-fileds"
+                        name="lastName"
+                        id="lastName"
+                        value={values.lastName}
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <input
-                      type="radio"
-                      id="option2"
-                      value="option2"
-                      name="subject"
-                    />
-                    <label htmlFor="option2">Option 2</label>
+                  <div className="row row-contactUs-form">
+                    <div className="col-6">
+                      <label htmlFor="emailContactUs">Email</label>
+                      <Field
+                        type="text"
+                        className="form-control from-text-fileds"
+                        name="emailContactUs"
+                        id="emailContactUs"
+                        value={values.emailContactUs}
+                      />
+                    </div>
+                    <div className="col-6">
+                      <label htmlFor="phoneNumberContactUs">Phone Number</label>
+                      <Field
+                        type="text"
+                        className="form-control from-text-fileds"
+                        name="phoneNumberContactUs"
+                        id="phoneNumberContactUs"
+                        value={values.phoneNumberContactUs}
+                        onKeyPress={(e) => {
+                          if (
+                            !/^[0-9]*$/.test(e.key) ||
+                            e.target.value.length > 9
+                          )
+                            e.preventDefault();
+                        }}
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <input
-                      type="radio"
-                      id="option3"
-                      value="option3"
-                      name="subject"
-                    />
-                    <label htmlFor="option3">Option 3</label>
+                  <div className="row my-5 row-contactUs-form">
+                    <div>
+                      <label htmlFor="subjectContactUs">Select Subject?</label>
+                      <div className="subject-options-holder">
+                        <Field
+                          name="subjectContactUs"
+                          render={({ field }) => (
+                            <>
+                              <div className="radio-item">
+                                <input
+                                  {...field}
+                                  id="newConnection"
+                                  value="newConnection"
+                                  checked={field.value === "newConnection"}
+                                  name="subjectContactUs"
+                                  type="radio"
+                                />
+                                <label htmlFor="newConnection">
+                                  New Connection
+                                </label>
+                              </div>
+
+                              <div className="radio-item">
+                                <input
+                                  {...field}
+                                  id="closeConnection"
+                                  value="closeConnection"
+                                  name="subjectContactUs"
+                                  checked={field.value === "closeConnection"}
+                                  type="radio"
+                                />
+                                <label htmlFor="closeConnection">
+                                  Close Connection
+                                </label>
+                              </div>
+                              <div className="radio-item">
+                                <input
+                                  {...field}
+                                  id="others"
+                                  value="others"
+                                  name="subjectContactUs"
+                                  checked={field.value === "others"}
+                                  type="radio"
+                                />
+                                <label htmlFor="others">Others</label>
+                              </div>
+                            </>
+                          )}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row my-5 row-contactUs-form">
+                    <div className="col-12">
+                      <label htmlFor="extraCommentContactUs">Comment</label>
+                      <Field
+                        className="form-control"
+                        name="extraCommentContactUs"
+                        id="extraCommentContactUs"
+                        value={values.extraCommentContactUs}
+                      />
+                    </div>
+                  </div>
+                  <div className="row my-5">
+                    <div className="col-6"></div>
+                    <div className="col-6">
+                      <div className="text-center button-holder-contactUS">
+                        <button>Reset</button>
+                        <button type="submit">Send Message</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="row my-5 row-contactUs-form">
-              <div className="col-12">
-                <label htmlFor="">Comment</label>
-                <input
-                  className="form-control"
-                  name="reason"
-                  id=""
-                  cols="30"
-                  rows="3"
-                ></input>
-              </div>
-            </div>
-            <div className="row my-5">
-              <div className="col-6"></div>
-              <div className="col-6">
-                <div className="text-center button-holder-contactUS">
-                  <button>Reset</button>
-                  <button>Send Message</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+            </Form>
+          )}
+        </Formik>
       </div>
     </>
   );

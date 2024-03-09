@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Lottie from "lottie-react";
 import HeaderAnimation from "../assets/animations/Animation - 1706339793428.json";
+import { useSelector } from "react-redux";
 
 function Header({ heading }) {
+  const loginData = useSelector((state) => state.loginStore);
+
   return (
     <>
       <div className="dashboard-holder">
@@ -21,7 +24,9 @@ function Header({ heading }) {
             }}
           >
             Welcome,
-            <span className="name-dashboard-header">Rovy Michael varghese</span>
+            <span className="name-dashboard-header">
+              {loginData.data.customerName}
+            </span>
           </div>
           <div className="animation-holder-dashboard-header">
             <Lottie

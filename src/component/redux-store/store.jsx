@@ -1,22 +1,23 @@
 import { createSlice, configureStore, combineReducers } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-
-const toastConfig = {
-  position: "bottom-right",
-  autoClose: 2000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-  theme: "dark",
-};
 
 const persistConfig = {
   key: "react",
   storage,
+};
+
+const pendingBills = {
+  billingAddress: "",
+  unitsUsed: "",
+  startDate: "",
+  endDate: "",
+  dueDate: "", //end date + 15
+  inVoiceNumber: "",
+  invoiceDate: "", //ending date+3
+  invoiceTotal: "",
+  totalAmount: "", //bill amount+additionalExpenses
+  additionalExpenses: [],
 };
 
 const signUpFormData = {
@@ -28,9 +29,8 @@ const loginFormData = {
   data: {},
 };
 
-const cartItems = {
-  cart: [],
-  totalAmount: 0,
+const complaintInitials = {
+  complaintData: [],
 };
 
 const LoginSlice = createSlice({
@@ -60,6 +60,9 @@ const SignUpSlice = createSlice({
         password: action.payload.password,
         phoneNumber: action.payload.phoneNumber,
         address: action.payload.address,
+        userId: action.payload.userId.toString(),
+        pendingBills: [...action.payload.pendingBills],
+        paidBills: [...action.payload.pendingBills],
       };
       console.log("new signup data>>>", newSignUp);
       state.signupdata = [...state.signupdata, newSignUp];
@@ -67,15 +70,28 @@ const SignUpSlice = createSlice({
   },
 });
 
+const ComplaintSlice = createSlice({
+  name: "complaint",
+  initialState: complaintInitials,
+  reducers: {
+    addComplaint(state, action) {
+      //action.payload={ userID:"", complaintDetails:"", complaintStatus:""}
+      console.log("payload>>>>>>>>", action.payload);
+    },
+  },
+});
+
 const rootReducer = combineReducers({
   loginStore: LoginSlice.reducer,
   signupStore: SignUpSlice.reducer,
+  complaintStore: ComplaintSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const loginReducers = LoginSlice.actions;
 export const signUpReducers = SignUpSlice.actions;
+export const complaintReducers = ComplaintSlice.actions;
 
 const store = configureStore({
   reducer: persistedReducer,
@@ -83,3 +99,72 @@ const store = configureStore({
 const persistor = persistStore(store);
 export default store;
 export { persistor };
+
+//login file
+
+// const currentDate = new Date();
+
+// const samplePendingBill = {
+//   billingAddress: "",
+//   unitsUsed: "67",
+//   startDate: new Date(),
+//   endDate: new Date(currentDate.setMonth(currentDate.getMonth() + 1)),
+//   dueDate: new Date(currentDate.setDate(currentDate.getDate() + 15)), //end date + 15
+//   inVoiceNumber: "#AB2324-01",
+//   invoiceDate: new Date(
+//     new Date().setDate(currentDate.getDate() + 3, new Date().getMonth() + 1)
+//   ), //ending date+3
+//   invoiceTotal: 67 * 10,
+//   totalAmount: 67 * 10, //bill amount+additionalExpenses
+//   additionalExpenses: [],
+// };
+// const signUpSubmitHandler = (values, resetForm) => {
+//   console.log({ values });
+//   if (
+//     checkingIfAlreadyUser(signUpStore, values.email, values.phoneNumber) ==
+//     "nothing"
+//   ) {
+//     console.log("user doesnt exist");
+
+//     const payload = {
+//       ...values,
+//       userId: getRandom(13),
+//       pendingBills: [
+//         {
+//           ...samplePendingBill,
+//         },
+//       ],
+//       paidBills: [],
+//     };
+//     setUserId(payload.userId);
+//     dispatcher(signUpReducers.signupButtonHandlerReducer(payload));
+//     resetForm();
+//     setshowSignUpModal(true);
+//   } else {
+//     toast.error(
+//       `User exist with the given ${checkingIfAlreadyUser(
+//         signUpStore,
+//         values.email,
+//         values.phoneNumber
+//       )}`,
+//       toastConfig
+//     );
+//   }
+// };
+
+//complaintRegister.jsx
+
+// const payload = {
+//   userId: values.complaintUserId,
+//   complaintDetails: {
+//     category: values.complaintCategory,
+//     subCategory: values.complaintSubCategory,
+//     problemDescription: values.problemDescription,
+//     contactPersonName: values.contactPersonName,
+//     contactPersonNumber: values.contactPersonNumber,
+//     complaintAddress: values.complaintAddress,
+//     complaintAddressLandmark: values.complaintAddressLandmark,
+//   },
+//   complaintStatus: "Pending",
+// };
+// dispatcher(complaintReducers.addComplaint(payload));

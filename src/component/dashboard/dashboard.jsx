@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./dashboard.css";
 import Lottie from "lottie-react";
 // import DashboardProfileAnimation from "../../assets/animations/Animation - 1706339793428.json";
@@ -12,11 +12,14 @@ import Header from "../header";
 // import SampleChart from "../sampleChart/sampleChart";
 import { useNavigate } from "react-router";
 import ViewBill from "./viewbill/viewbill";
+import { useSelector } from "react-redux";
 
 function Dashboard() {
   const navigate = useNavigate();
   const [viewingBill, setViewingBill] = useState(false);
   const [monthViewBill, setMonthViewBill] = useState("");
+  let allData = useSelector((state) => state.loginStore);
+  allData = allData.data;
   return (
     <div>
       <Header heading={"Dashboard"} />
@@ -31,7 +34,7 @@ function Dashboard() {
               </div>
               <div className="card-content-holder">
                 <p>This month Bill</p>
-                <span>₹1244</span>
+                <span>₹{allData.pendingBills[0].totalAmount}</span>
               </div>
             </div>
             <div className="card-dashboard">
@@ -40,7 +43,7 @@ function Dashboard() {
               </div>
               <div className="card-content-holder">
                 <p>Total Money spent</p>
-                <span>₹8424</span>
+                <span>₹{allData.pendingBills[0].invoiceTotal}</span>
               </div>
             </div>
             <div className="card-dashboard">
@@ -49,17 +52,12 @@ function Dashboard() {
               </div>
               <div className="card-content-holder">
                 <p>Unit Used</p>
-                <span>67 Units</span>
+                <span>{allData.pendingBills[0].unitsUsed} units</span>
               </div>
             </div>
           </div>
           <div className="main-yearly-news-holder-dashboard">
-            <div
-              className="yearly-chart-holder-dashboard"
-              onClick={() => {
-                navigate("/graph");
-              }}
-            >
+            <div className="yearly-chart-holder-dashboard">
               Sample chart to show monthly Electricity bill
             </div>
             <div className="news-showholder-dashboard">news section holder</div>

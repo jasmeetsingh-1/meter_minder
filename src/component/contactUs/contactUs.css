@@ -5,7 +5,7 @@
 }
 
 .header-of-contactUs {
-  background-color: black;
+  background-color: #000000f2;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   color: white;
@@ -80,12 +80,16 @@
 
 .button-holder-contactUS button:nth-child(2) {
   font-family: Poppins;
-  background-color: black;
+  background-color: #000000f2;
   color: white;
   outline: none;
   border: none;
   border-radius: 5px;
   padding: 10px 12px;
+}
+
+.button-holder-contactUS button:nth-child(2):hover {
+  background-color: black;
 }
 .button-holder-contactUS button:nth-child(1) {
   border: none;
