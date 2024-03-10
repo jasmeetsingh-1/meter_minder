@@ -75,8 +75,48 @@ const ComplaintSlice = createSlice({
   initialState: complaintInitials,
   reducers: {
     addComplaint(state, action) {
-      //action.payload={ userID:"", complaintDetails:"", complaintStatus:""}
-      console.log("payload>>>>>>>>", action.payload);
+      //now check if object with the action.payload.userId exist
+      //then update the array , either enter new one
+
+      const indexOFItem = state.complaintData.findIndex(
+        (item) => item.userId === action.payload.userId
+      );
+
+      let newItem;
+
+      if (indexOFItem !== -1) {
+        //user ID already have an complaints array
+        const temp = state.complaintData[indexOFItem];
+        // console.log("item already in ", temp.userId);
+        newItem = {
+          ...temp,
+          complaintDetails: [
+            ...temp.complaintDetails,
+            action.payload.complaintDetails,
+          ],
+        };
+        console.log("item>>>", newItem);
+        const updatedItems = [...state.complaintData];
+        updatedItems[indexOFItem] = newItem;
+        state.complaintData = updatedItems;
+      } else {
+        console.log("Action payload", action.payload);
+        //new item to add in cart
+        const newItem = {
+          userId: action.payload.userId,
+          complaintDetails: [
+            {
+              ...action.payload.complaintDetails,
+            },
+          ],
+        };
+        const updatedItems = state.complaintData.concat(newItem);
+        console.log(updatedItems);
+        state.complaintData = updatedItems;
+      }
+    },
+    clearComplaintData(state) {
+      state.complaintData = [];
     },
   },
 });
@@ -153,18 +193,29 @@ export { persistor };
 // };
 
 //complaintRegister.jsx
+// function getRandom(length) {
+//   return Math.floor(
+//     Math.pow(10, length - 1) +
+//       Math.random() * 9 * Math.pow(10, length - 1).toString()
+//   );
+// }
 
-// const payload = {
-//   userId: values.complaintUserId,
-//   complaintDetails: {
-//     category: values.complaintCategory,
-//     subCategory: values.complaintSubCategory,
-//     problemDescription: values.problemDescription,
-//     contactPersonName: values.contactPersonName,
-//     contactPersonNumber: values.contactPersonNumber,
-//     complaintAddress: values.complaintAddress,
-//     complaintAddressLandmark: values.complaintAddressLandmark,
-//   },
-//   complaintStatus: "Pending",
+// const complaintRegisteredSubmtHandler = (values) => {
+//   const payload = {
+//     userId: values.complaintUserId,
+//     complaintDetails: {
+//       complaintId: getRandom(5),
+//       complaintStatus: "Pending",
+//       category: values.complaintCategory,
+//       subCategory: values.complaintSubCategory,
+//       problemDescription: values.problemDescription,
+//       contactPersonName: values.contactPersonName,
+//       contactPersonNumber: values.contactPersonNumber,
+//       complaintAddress: values.complaintAddress,
+//       complaintAddressLandmark: values.complaintAddressLandmark,
+//     },
+//   };
+//   setuniqueComplaintId(payload.complaintDetails.complaintId);
+//   dispatcher(complaintReducers.addComplaint(payload));
+//   setshowComplaintRegisteredModal(true);
 // };
-// dispatcher(complaintReducers.addComplaint(payload));

@@ -2,10 +2,17 @@ import React, { useEffect } from "react";
 import Lottie from "lottie-react";
 import HeaderAnimation from "../assets/animations/Animation - 1706339793428.json";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 
 function Header({ heading }) {
-  const loginData = useSelector((state) => state.loginStore);
+  const navigate = useNavigate();
+  const userData = useSelector((state) => state.loginStore);
 
+  useEffect(() => {
+    if (!userData.isloggedIn) {
+      navigate("/login");
+    }
+  }, [userData]);
   return (
     <>
       <div className="dashboard-holder">
@@ -25,7 +32,7 @@ function Header({ heading }) {
           >
             Welcome,
             <span className="name-dashboard-header">
-              {loginData.data.customerName}
+              {userData.data.customerName}
             </span>
           </div>
           <div className="animation-holder-dashboard-header">

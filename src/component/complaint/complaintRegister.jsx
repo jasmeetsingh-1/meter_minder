@@ -4,12 +4,14 @@ import Header from "../header";
 import ComplaintRegisteredModal from "../modals/complaintRegisteredModal";
 import "./cssFiles/complaintRegister.css";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { complaintReducers } from "../redux-store/store";
 
 function ComplaintRegister(props) {
   const [showComplaintRegisteredModal, setshowComplaintRegisteredModal] =
     useState(false);
+  const [uniqueComplaintId, setuniqueComplaintId] = useState("");
+  const userData = useSelector((state) => state.loginStore);
 
   const dispatcher = useDispatch();
 
@@ -121,7 +123,7 @@ function ComplaintRegister(props) {
       ],
     },
     {
-      category: "Meter readings",
+      category: "Meter reading",
       subCategory: [
         {
           value: "Meter Not Recording Consumption Accurately",
@@ -166,11 +168,19 @@ function ComplaintRegister(props) {
     },
   ];
 
-  const complaintRegisteredSubmtHandler = (values, errors) => {
-    setshowComplaintRegisteredModal(true);
+  function getRandom(length) {
+    return Math.floor(
+      Math.pow(10, length - 1) +
+        Math.random() * 9 * Math.pow(10, length - 1).toString()
+    );
+  }
+
+  const complaintRegisteredSubmtHandler = (values) => {
     const payload = {
       userId: values.complaintUserId,
       complaintDetails: {
+        complaintId: getRandom(5),
+        complaintStatus: "Pending",
         category: values.complaintCategory,
         subCategory: values.complaintSubCategory,
         problemDescription: values.problemDescription,
@@ -179,9 +189,10 @@ function ComplaintRegister(props) {
         complaintAddress: values.complaintAddress,
         complaintAddressLandmark: values.complaintAddressLandmark,
       },
-      complaintStatus: "Pending",
     };
+    setuniqueComplaintId(payload.complaintDetails.complaintId);
     dispatcher(complaintReducers.addComplaint(payload));
+    setshowComplaintRegisteredModal(true);
   };
 
   const complaintRegisterFormValidator = Yup.object({
@@ -210,11 +221,11 @@ function ComplaintRegister(props) {
   const complaintRegisterFormInitialValue = {
     complaintCategory: "Choose Category",
     complaintSubCategory: "Choose category to see Subcategory",
-    complaintUserId: "123456789123",
-    problemDescription: "",
-    contactPersonName: "",
-    contactPersonNumber: "",
-    complaintAddress: "",
+    complaintUserId: userData.data.userId,
+    problemDescription: "desfr",
+    contactPersonName: "Jasmeet ",
+    contactPersonNumber: "9877998276",
+    complaintAddress: "address",
     complaintAddressLandmark: "",
   };
 
@@ -496,9 +507,6 @@ function ComplaintRegister(props) {
                 <button
                   className="btn btn-primary register-complaint-buttons"
                   style={{ width: "23%" }}
-                  onClick={() => {
-                    console.log(formik.errors);
-                  }}
                 >
                   Submit Complaint
                 </button>
@@ -508,6 +516,7 @@ function ComplaintRegister(props) {
         </div>
       </div>
       <ComplaintRegisteredModal
+        uniqueComplaintId={uniqueComplaintId}
         showModal={showComplaintRegisteredModal}
         onHide={() => {
           setshowComplaintRegisteredModal(false);

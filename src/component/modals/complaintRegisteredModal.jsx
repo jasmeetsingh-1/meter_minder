@@ -9,7 +9,12 @@ import "react-toastify/dist/ReactToastify.css";
 import CopyToClipboard from "react-copy-to-clipboard";
 import copyLogo from "../../assets/copy-svgrepo-com.svg";
 
-function ComplaintRegisteredModal({ showModal, onHide, setmenuSelected }) {
+function ComplaintRegisteredModal({
+  showModal,
+  onHide,
+  setmenuSelected,
+  uniqueComplaintId,
+}) {
   const toastConfig = {
     position: "bottom-right",
     autoClose: 3000,
@@ -50,13 +55,13 @@ function ComplaintRegisteredModal({ showModal, onHide, setmenuSelected }) {
             </span>
             <div className="signup-modal-userId-holder">
               Complaint Id:{" "}
-              <CopyToClipboard text="1205">
+              <CopyToClipboard text={uniqueComplaintId}>
                 <span
                   onClick={() => {
                     toast.success("Complaint Id copied!", toastConfig);
                   }}
                 >
-                  1205
+                  {uniqueComplaintId}
                   <img
                     src={copyLogo}
                     width="15px"
@@ -66,9 +71,13 @@ function ComplaintRegisteredModal({ showModal, onHide, setmenuSelected }) {
               </CopyToClipboard>
             </div>
           </div>
-          <div style={{ textAlign: "center" }}>
+          <div style={{ display: "flex", justifyContent: "center" }}>
             <button
-              style={{ minWidth: "25%" }}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                minWidth: "25%",
+              }}
               className="btn signup-form-loginButton"
               onClick={() => {
                 setmenuSelected(4);
