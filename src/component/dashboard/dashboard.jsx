@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./dashboard.css";
-import Lottie from "lottie-react";
-// import DashboardProfileAnimation from "../../assets/animations/Animation - 1706339793428.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faRupeeSign,
@@ -9,22 +7,29 @@ import {
   faBoltLightning,
 } from "@fortawesome/free-solid-svg-icons";
 import Header from "../header";
-// import SampleChart from "../sampleChart/sampleChart";
 import { useNavigate } from "react-router";
 import ViewBill from "./viewbill/viewbill";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import NewsSection from "../newsSection/newsSection";
+import ExpensesChart from "../sampleChart/expensesChart";
 
 function Dashboard() {
   const navigate = useNavigate();
   const [viewingBill, setViewingBill] = useState(false);
   const [monthViewBill, setMonthViewBill] = useState("");
-  let allData = useSelector((state) => state.loginStore);
-  allData = allData.data;
+  const allData = useSelector((state) => state.loginStore);
+
+  useEffect(() => {
+    if (!allData.isloggedIn) {
+      navigate("/login");
+    }
+  }, [allData.isloggedIn, navigate]);
   return (
     <div>
       <Header heading={"Dashboard"} />
       {viewingBill ? (
-        <ViewBill month={monthViewBill} />
+        <ViewBill month={monthViewBill} setViewingBill={setViewingBill} />
       ) : (
         <>
           <div className="dashboard-card-holders">
@@ -34,7 +39,11 @@ function Dashboard() {
               </div>
               <div className="card-content-holder">
                 <p>This month Bill</p>
-                <span>₹{allData.pendingBills[0].totalAmount}</span>
+                {allData.isloggedIn ? (
+                  <span>₹{allData.data.pendingBills[0].invoiceTotal}</span>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
             <div className="card-dashboard">
@@ -43,7 +52,11 @@ function Dashboard() {
               </div>
               <div className="card-content-holder">
                 <p>Total Money spent</p>
-                <span>₹{allData.pendingBills[0].invoiceTotal}</span>
+                {allData.isloggedIn ? (
+                  <span>₹{allData.data.pendingBills[0].totalAmount}</span>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
             <div className="card-dashboard">
@@ -52,68 +65,52 @@ function Dashboard() {
               </div>
               <div className="card-content-holder">
                 <p>Unit Used</p>
-                <span>{allData.pendingBills[0].unitsUsed} units</span>
+                {allData.isloggedIn ? (
+                  <span>{allData.data.pendingBills[0].unitsUsed} Units</span>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
           <div className="main-yearly-news-holder-dashboard">
             <div className="yearly-chart-holder-dashboard">
-              Sample chart to show monthly Electricity bill
+              <ExpensesChart />
             </div>
-            <div className="news-showholder-dashboard">news section holder</div>
+            <div className="news-showholder-dashboard" sec>
+              <NewsSection />
+            </div>
           </div>
 
           <div style={{ margin: "0 1rem" }}>
             <div className="monthly-bill-dashboard-holder">
               <span>Recent Payment</span>
-              <div className="monthly-expenses-holder">
-                <span>January</span>
-                <span>Rs. 3000</span>
-                <span
-                  onClick={() => {
-                    setMonthViewBill("January");
-                    setViewingBill(true);
+
+              {!allData.data.paidBills ? (
+                <div
+                  style={{
+                    fontSize: "xx-large",
+                    textAlign: "center",
                   }}
                 >
-                  View Bill
-                </span>
-                <span>5 Feb, 2023</span>
-              </div>
-
-              <div className="monthly-expenses-holder">
-                <span>January</span>
-                <span>Rs. 3000</span>
-                <span
-                  onClick={() => {
-                    setMonthViewBill("Febrary");
-                    setViewingBill(true);
-                  }}
-                >
-                  View Bill
-                </span>
-                <span>5 Feb, 2023</span>
-              </div>
-
-              <div className="monthly-expenses-holder">
-                <span>January</span>
-                <span>Rs. 3000</span>
-                <span>View Bill</span>
-                <span>5 Feb, 2023</span>
-              </div>
-
-              <div className="monthly-expenses-holder">
-                <span>January</span>
-                <span>Rs. 3000</span>
-                <span>View Bill</span>
-                <span>5 Feb, 2023</span>
-              </div>
-
-              <div className="monthly-expenses-holder">
-                <span>January</span>
-                <span>Rs. 3000</span>
-                <span>View Bill</span>
-                <span>5 Feb, 2023</span>
-              </div>
+                  {" "}
+                  No Payment Made
+                </div>
+              ) : (
+                <div className="monthly-expenses-holder">
+                  <span>March</span>
+                  <span>Rs. {allData.data.paidBills.invoiceTotal}</span>
+                  <span
+                    onClick={() => {
+                      setMonthViewBill("April");
+                      setViewingBill(true);
+                    }}
+                  >
+                    View Bill
+                  </span>
+                  <span>{allData.data.paidBills.startDate.slice(0, 10)}</span>
+                </div>
+              )}
             </div>
           </div>
         </>

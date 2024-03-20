@@ -4,7 +4,7 @@ import Header from "../header";
 import PaymentModal from "../modals/paymentModal";
 import PaymentSuccessfullModal from "../modals/PaymentSuccessfulModal";
 
-function PayBill({ setSideMenuState }) {
+function PayBill({ setmenuSelected }) {
   const [showPaymentModal, setshowPaymentModal] = useState(false);
   const [showPaymentSuccessfulModal, setshowPaymentSuccessfulModal] =
     useState(false);
@@ -110,7 +110,7 @@ function PayBill({ setSideMenuState }) {
         <button
           className="btn btn-secondary"
           onClick={() => {
-            setSideMenuState(1);
+            setmenuSelected(1);
           }}
         >
           Back to home
@@ -136,7 +136,7 @@ function PayBill({ setSideMenuState }) {
         }}
       />
       <PaymentSuccessfullModal
-        setSideMenuState={setSideMenuState}
+        setmenuSelected={setmenuSelected}
         showModal={showPaymentSuccessfulModal}
         onHide={() => {
           setshowPaymentSuccessfulModal(false);

@@ -3,10 +3,17 @@ import Header from "../header";
 import DeleteComplaintModal from "../modals/deleteComplaintModal";
 import "./cssFiles/complaintStatus.css";
 import { ToastContainer, toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 function ComplaintStatus() {
   const [showDeleteComplaintModal, setShowDeleteComplaintModal] =
     useState(false);
+  const [complaintIDToDelete, setcomplaintIDToDelete] = useState("");
+  let complaintData = useSelector(
+    (state) => state.complaintStore.complaintData[0]
+  );
+  // complaintData = complaintData[0];
+
   const toastConfig = {
     position: "bottom-right",
     autoClose: 3000,
@@ -32,7 +39,7 @@ function ComplaintStatus() {
               <table className="table">
                 <thead className="table-dark">
                   <tr>
-                    <th scope="col">Sl No:</th>
+                    <th scope="col">Si No:</th>
                     <th scope="col">Complaint ID</th>
                     <th scope="col">Category</th>
                     <th scope="col">Status</th>
@@ -40,49 +47,42 @@ function ComplaintStatus() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>123</td>
-                    <td>Electric shock</td>
-                    <td>Waiting</td>
-                    <td>
-                      <button
-                        className="btn  btn-danger"
-                        onClick={(e) => {
-                          setShowDeleteComplaintModal(true);
-                          e.preventDefault();
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>345</td>
-                    <td>Cash back</td>
-                    <td>success</td>
-                    <td>
-                      <button
-                        className="btn  btn-success"
-                        onClick={(e) => {
-                          e.preventDefault();
-                        }}
-                      >
-                        view report
-                      </button>
-                    </td>
-                  </tr>
+                  {complaintData ? (
+                    <>
+                      {complaintData.complaintDetails.map((item, index) => {
+                        return (
+                          <tr>
+                            <th scope="row">{index + 1}</th>
+                            <td>{item.complaintId}</td>
+                            <td>{item.category}</td>
+                            <td>{item.complaintStatus}</td>
+                            <td>
+                              <button
+                                className="btn  btn-danger"
+                                onClick={(e) => {
+                                  setShowDeleteComplaintModal(true);
+                                  setcomplaintIDToDelete(item.complaintId);
+                                  e.preventDefault();
+                                }}
+                              >
+                                Delete
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </tbody>
               </table>
-              <div className="text-center">
-                {/* <!-- <button>button name</buttoxn> --> */}
-              </div>
             </form>
           </div>
         </div>
       </div>
       <DeleteComplaintModal
+        complaintIDToDelete={complaintIDToDelete}
         showModal={showDeleteComplaintModal}
         onHide={() => {
           setShowDeleteComplaintModal(false);

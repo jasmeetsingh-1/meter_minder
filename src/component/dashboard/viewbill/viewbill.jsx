@@ -1,13 +1,14 @@
-import { Formik, Form, validateYupSchema } from "formik";
+import { Formik, Form } from "formik";
 import React from "react";
 import logo from "../../../assets/logo.svg";
+import backButton from "../../../assets/back-svgrepo-com.svg";
 import "./viewbill.css";
 
-function ViewBill({ month }) {
+function ViewBill({ month, setViewingBill }) {
   var converter = require("number-to-words");
   const innvoiceDatesData = {
-    dueDate: "15 Aug, 2023",
-    invoiceDate: "1 Aug, 2023",
+    dueDate: "2024-04-28",
+    invoiceDate: "2024-03-31",
     invoiceNumber: "#AB2324-01",
     refernceNumber: "INV-057",
   };
@@ -16,15 +17,19 @@ function ViewBill({ month }) {
   }
   return (
     <div className="view-bill-main-holder">
+      <img
+        src={backButton}
+        alt=""
+        width="20px"
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+          setViewingBill(false);
+        }}
+      />
       <div className="view-bill-header">
         <div>
-          <img
-            src={logo}
-            width="50px"
-            title="website-logo"
-            alt="website-logo"
-          />
-          <span>Meter Minder</span>
+          <img src={logo} alt="logo" title="logo" />
+          <span>KSEB</span>
         </div>
         <div>
           <span>
@@ -36,10 +41,10 @@ function ViewBill({ month }) {
       </div>
       <div className="billed-to-address">
         <span>Billed to</span>
-        <span style={{ fontWeight: "700", color: "black" }}>Customer Name</span>
+        <span style={{ fontWeight: "700", color: "black" }}>Jasmeet Singh</span>
         <span>
-          Customer address <br />
-          City, Country - 0000 <br />
+          Info Park <br />
+          Kochi <br />
           +0 (000) 123-4567
         </span>
       </div>
@@ -98,29 +103,16 @@ function ViewBill({ month }) {
                 <td>Electricity</td>
 
                 <td>67</td>
-                <td>₹3</td>
-                <td>₹1244</td>
+                <td>₹10</td>
+                <td>₹670</td>
               </tr>
-              <tr className="tr-to-color-view-bill">
-                <td>Electricity</td>
 
-                <td>67</td>
-                <td>₹3</td>
-                <td>₹1244</td>
-              </tr>
-              <tr className="tr-to-color-view-bill">
-                <td>Electricity</td>
-
-                <td>67</td>
-                <td>₹3</td>
-                <td>₹1244</td>
-              </tr>
               <tr className="sub-table-view-bill">
                 <td></td>
                 <td></td>
 
                 <td>SubTotal</td>
-                <td>₹1244</td>
+                <td>₹670</td>
               </tr>
               <tr className="sub-table-view-bill">
                 <td></td>
@@ -134,7 +126,7 @@ function ViewBill({ month }) {
                 <td></td>
 
                 <td>Total</td>
-                <td>₹1244</td>
+                <td>₹670</td>
               </tr>
               <tr className="sub-table-view-bill">
                 <td></td>
@@ -154,20 +146,20 @@ function ViewBill({ month }) {
                     borderBottomRightRadius: "20px",
                   }}
                 >
-                  ₹1244
+                  ₹670
                 </td>
               </tr>
             </tbody>
           </table>
           <div className="total-amount-in-Words-holder">
-            Rs. {capitalizeFirstLetter(converter.toWords(1244))} only
+            Rs. {capitalizeFirstLetter(converter.toWords(670))} only
           </div>
         </div>
         <div className="footer-view-bill-portion">
           <div>Thank you for the business!</div>
           <div>
             <span>+91 00000 00000</span>
-            <span>hello@gmail.com</span>
+            <span>demo@gmail.com</span>
           </div>
         </div>
       </div>

@@ -1,10 +1,9 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router";
-import Select from "react-select";
 import countryList from "react-select-country-list";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -17,13 +16,13 @@ import { signUpReducers, loginReducers } from "../../redux-store/store";
 
 library.add(faEye);
 
-function LoginPage() {
+function Login() {
   const navigate = useNavigate();
   const dispatcher = useDispatch();
-  const signUpStore = useSelector((state) => state.signupStore.signupdata);
   const countryCodeOptions = useMemo(() => countryList().getData(), []);
   const [loginOrSignUp, setloginOrSignUp] = useState("login");
   const [showSignUpModal, setshowSignUpModal] = useState(false);
+  const signUpStore = useSelector((state) => state.signupStore.signupdata);
   const [loginData, setloginData] = useState({
     loginUserId: "",
     loginPassword: "",
@@ -39,7 +38,7 @@ function LoginPage() {
 
   const toastConfig = {
     position: "bottom-right",
-    autoClose: 2000,
+    autoClose: 1000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -61,23 +60,6 @@ function LoginPage() {
     confirmPassword: "",
   };
 
-  const currentDate = new Date();
-
-  const samplePendingBill = {
-    billingAddress: "",
-    unitsUsed: "67",
-    startDate: new Date(),
-    endDate: new Date(currentDate.setMonth(currentDate.getMonth() + 1)),
-    dueDate: new Date(currentDate.setDate(currentDate.getDate() + 15)), //end date + 15
-    inVoiceNumber: "#AB2324-01",
-    invoiceDate: new Date(
-      new Date().setDate(currentDate.getDate() + 3, new Date().getMonth() + 1)
-    ), //ending date+3
-    invoiceTotal: 67 * 10,
-    totalAmount: 67 * 10, //bill amount+additionalExpenses
-    additionalExpenses: [],
-  };
-
   const validationSignUpSchema = Yup.object({
     consumerId: Yup.number().required("Please enter the Consumer Id"),
     billNumber: Yup.number().required("Please enter valid  number"),
@@ -95,7 +77,7 @@ function LoginPage() {
       .matches(/[0-9]/, "Password must contain at least one number")
       .matches(/[A-Z]/, "Password must contain at least one capital letter")
       .matches(
-        /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/,
+        /[!@#$%^&*()_+{}[\]:;<>,.?~\\/-]/,
         "Password must contain at least one special character"
       ),
     confirmPassword: Yup.string()
@@ -106,12 +88,12 @@ function LoginPage() {
   const checkingIfAlreadyUser = (signUpFormData, email, phoneNumber) => {
     //return false -> user doesnt exist
     let flag = "nothing";
-    signUpFormData.map((item) => {
-      if (item.email == email) {
+    signUpFormData.forEach((item) => {
+      if (item.email === email) {
         flag = "email";
         return;
       }
-      if (item.phoneNumber == phoneNumber) {
+      if (item.phoneNumber === phoneNumber) {
         flag = "Phone Number";
         return;
       }
@@ -127,10 +109,26 @@ function LoginPage() {
     );
   }
 
+  const currentDate = new Date();
+
+  const samplePendingBill = {
+    billingAddress: "InfoPark, kochi, Kerala",
+    unitsUsed: "67",
+    startDate: new Date(),
+    endDate: new Date(currentDate.setMonth(currentDate.getMonth() + 1)),
+    dueDate: new Date(currentDate.setDate(currentDate.getDate() + 15)), //end date + 15
+    inVoiceNumber: "#AB2324-01",
+    invoiceDate: new Date(
+      new Date().setDate(currentDate.getDate() + 3, new Date().getMonth() + 1)
+    ), //ending date+3
+    invoiceTotal: 67 * 10,
+    totalAmount: 67 * 10, //bill amount+additionalExpenses
+    additionalExpenses: [],
+  };
   const signUpSubmitHandler = (values, resetForm) => {
     console.log({ values });
     if (
-      checkingIfAlreadyUser(signUpStore, values.email, values.phoneNumber) ==
+      checkingIfAlreadyUser(signUpStore, values.email, values.phoneNumber) ===
       "nothing"
     ) {
       console.log("user doesnt exist");
@@ -143,7 +141,7 @@ function LoginPage() {
             ...samplePendingBill,
           },
         ],
-        paidBills: [],
+        paidBills: {},
       };
       setUserId(payload.userId);
       dispatcher(signUpReducers.signupButtonHandlerReducer(payload));
@@ -160,12 +158,11 @@ function LoginPage() {
       );
     }
   };
-
   const loginValidator = (loginData) => {
     let flag = "No User with the given User ID.";
-    signUpStore.map((item) => {
-      if (item.userId == loginData.loginUserId) {
-        if (item.password == loginData.loginPassword) {
+    signUpStore.forEach((item) => {
+      if (item.userId === loginData.loginUserId) {
+        if (item.password === loginData.loginPassword) {
           flag = "loginSuccessful";
           dispatcher(
             loginReducers.loginButtonHandlerReducers({
@@ -203,7 +200,7 @@ function LoginPage() {
       return;
     }
 
-    if (loginData.loginUserId.length != 13) {
+    if (loginData.loginUserId.length !== 13) {
       setLoginError({
         ...loginError,
         userIdError: true,
@@ -211,7 +208,7 @@ function LoginPage() {
       return;
     }
 
-    if (loginValidator(loginData) == "loginSuccessful") {
+    if (loginValidator(loginData) === "loginSuccessful") {
       toast.success("Login Successful", toastConfig);
       setTimeout(() => {
         navigate("/");
@@ -283,7 +280,7 @@ function LoginPage() {
                   id="loginPassword"
                   name="loginPassword"
                   value={loginData.loginPassword}
-                  placeholder="Enter your passsword"
+                  placeholder="Enter your password"
                   onChange={(e) => {
                     setloginData({
                       ...loginData,
@@ -367,7 +364,6 @@ function LoginPage() {
               validationSchema={validationSignUpSchema}
               onSubmit={(values, { resetForm }) => {
                 signUpSubmitHandler(values, resetForm);
-                // console.log({ values });
               }}
             >
               {({ values, handleChange, resetForm, errors, touched }) => (
@@ -452,7 +448,7 @@ function LoginPage() {
                     </div>
                     <div style={{ width: "80%" }}>
                       <label htmlFor="customerName" className="form-label">
-                        Customer Name{" "}
+                        Customer Name
                         <span style={{ color: "#4318FF" }}>*</span>
                       </label>
                       <Field
@@ -499,11 +495,7 @@ function LoginPage() {
                         }}
                       />
                     </div>
-                    {/* </div>
-                  <div
-                    className="signup-form-row-holder"
-                    style={{ gap: "0.5rem !important" }}
-                  > */}
+
                     <div style={{ height: "fit-content" }}>
                       <label htmlFor="phoneNumber" className="form-label">
                         Phone number <span style={{ color: "#4318FF" }}>*</span>
@@ -611,7 +603,7 @@ function LoginPage() {
                     </div>
                     <div className="signup-form-text-field-holder">
                       <label htmlFor="confirmPassword" className="form-label">
-                        Confirm Password{" "}
+                        Confirm Password
                         <span style={{ color: "#4318FF" }}>*</span>
                       </label>
                       <Field
@@ -682,7 +674,7 @@ function LoginPage() {
           </div>
         </div>
       </div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <SignupModal
         showModal={showSignUpModal}
         userId={userId}
@@ -698,4 +690,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default Login;

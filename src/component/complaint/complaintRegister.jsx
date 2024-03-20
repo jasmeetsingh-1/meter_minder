@@ -11,10 +11,8 @@ function ComplaintRegister(props) {
   const [showComplaintRegisteredModal, setshowComplaintRegisteredModal] =
     useState(false);
   const [uniqueComplaintId, setuniqueComplaintId] = useState("");
-  const userData = useSelector((state) => state.loginStore);
-
+  const allData = useSelector((state) => state.loginStore.data);
   const dispatcher = useDispatch();
-
   const complaintCategory = [
     {
       value: "Choose Category",
@@ -221,11 +219,11 @@ function ComplaintRegister(props) {
   const complaintRegisterFormInitialValue = {
     complaintCategory: "Choose Category",
     complaintSubCategory: "Choose category to see Subcategory",
-    complaintUserId: userData.data.userId,
-    problemDescription: "desfr",
-    contactPersonName: "Jasmeet ",
-    contactPersonNumber: "9877998276",
-    complaintAddress: "address",
+    complaintUserId: allData.userId,
+    problemDescription: "",
+    contactPersonName: "",
+    contactPersonNumber: "",
+    complaintAddress: "",
     complaintAddressLandmark: "",
   };
 
@@ -298,7 +296,7 @@ function ComplaintRegister(props) {
                     onChange={formik.handleChange}
                   >
                     {subCategories.map((item) => {
-                      if (item.category == formik.values.complaintCategory) {
+                      if (item.category === formik.values.complaintCategory) {
                         return item.subCategory.map((item) => {
                           return (
                             <option value={item.value}>{item.value}</option>
@@ -494,22 +492,26 @@ function ComplaintRegister(props) {
                   )}
                 </div>
               </div>
-              <div className=" row text-centercol-12 register-complaint-button-holder">
-                <button
-                  className="btn btn-secondary register-complaint-buttons"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    formik.resetForm();
-                  }}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="btn btn-primary register-complaint-buttons"
-                  style={{ width: "23%" }}
-                >
-                  Submit Complaint
-                </button>
+              <div className="row text-center">
+                <div className="col-12 register-complaint-button-holder">
+                  <button
+                    className="btn btn-secondary register-complaint-buttons"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      formik.resetForm();
+                    }}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="btn btn-primary register-complaint-buttons"
+                    onClick={() => {
+                      console.log(formik.errors);
+                    }}
+                  >
+                    Submit Complaint
+                  </button>
+                </div>
               </div>
             </form>
           </div>
@@ -521,7 +523,7 @@ function ComplaintRegister(props) {
         onHide={() => {
           setshowComplaintRegisteredModal(false);
         }}
-        setmenuSelected={props.setSideMenuState}
+        setmenuSelected={props.setmenuSelected}
       />
     </>
   );

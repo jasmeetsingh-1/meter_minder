@@ -1,0 +1,14 @@
+.news-section-outer-main-div-holder {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 1rem;
+}
+
+.news-section-holder-css {
+  display: flex;
+  gap: 0.5rem;
+  border: 0.5px solid lightgrey;
+  border-radius: 20px;
+  padding: 10px;
+}

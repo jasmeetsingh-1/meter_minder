@@ -7,19 +7,6 @@ const persistConfig = {
   storage,
 };
 
-const pendingBills = {
-  billingAddress: "",
-  unitsUsed: "",
-  startDate: "",
-  endDate: "",
-  dueDate: "", //end date + 15
-  inVoiceNumber: "",
-  invoiceDate: "", //ending date+3
-  invoiceTotal: "",
-  totalAmount: "", //bill amount+additionalExpenses
-  additionalExpenses: [],
-};
-
 const signUpFormData = {
   signupdata: [],
 };
@@ -41,6 +28,16 @@ const LoginSlice = createSlice({
       state.isloggedIn = action.payload.status;
       state.data = action.payload.userdata;
     },
+    logoutButtonHandler(state) {
+      state.isloggedIn = false;
+      state.data = {};
+    },
+    billPaidHandler(state) {
+      const allData = { ...state.data };
+      allData.paidBills = { ...allData.pendingBills[0] };
+      state.isloggedIn = true;
+      state.data = allData;
+    },
   },
 });
 
@@ -49,7 +46,6 @@ const SignUpSlice = createSlice({
   initialState: signUpFormData,
   reducers: {
     signupButtonHandlerReducer(state, action) {
-      console.log("action payload>>>>>>>>>", action.payload);
       const newSignUp = {
         consumerId: action.payload.consumerId,
         billNumber: action.payload.billNumber,
@@ -62,9 +58,8 @@ const SignUpSlice = createSlice({
         address: action.payload.address,
         userId: action.payload.userId.toString(),
         pendingBills: [...action.payload.pendingBills],
-        paidBills: [...action.payload.pendingBills],
+        paidBills: null,
       };
-      console.log("new signup data>>>", newSignUp);
       state.signupdata = [...state.signupdata, newSignUp];
     },
   },
@@ -87,20 +82,17 @@ const ComplaintSlice = createSlice({
       if (indexOFItem !== -1) {
         //user ID already have an complaints array
         const temp = state.complaintData[indexOFItem];
-        // console.log("item already in ", temp.userId);
         newItem = {
           ...temp,
           complaintDetails: [
-            ...temp.complaintDetails,
             action.payload.complaintDetails,
+            ...temp.complaintDetails,
           ],
         };
-        console.log("item>>>", newItem);
         const updatedItems = [...state.complaintData];
         updatedItems[indexOFItem] = newItem;
         state.complaintData = updatedItems;
       } else {
-        console.log("Action payload", action.payload);
         //new item to add in cart
         const newItem = {
           userId: action.payload.userId,
@@ -114,6 +106,9 @@ const ComplaintSlice = createSlice({
         console.log(updatedItems);
         state.complaintData = updatedItems;
       }
+    },
+    deleteComplaintById(state, action) {
+      // action.payload={userid:"", complaintId:""}
     },
     clearComplaintData(state) {
       state.complaintData = [];
@@ -139,83 +134,3 @@ const store = configureStore({
 const persistor = persistStore(store);
 export default store;
 export { persistor };
-
-//login file
-
-// const currentDate = new Date();
-
-// const samplePendingBill = {
-//   billingAddress: "",
-//   unitsUsed: "67",
-//   startDate: new Date(),
-//   endDate: new Date(currentDate.setMonth(currentDate.getMonth() + 1)),
-//   dueDate: new Date(currentDate.setDate(currentDate.getDate() + 15)), //end date + 15
-//   inVoiceNumber: "#AB2324-01",
-//   invoiceDate: new Date(
-//     new Date().setDate(currentDate.getDate() + 3, new Date().getMonth() + 1)
-//   ), //ending date+3
-//   invoiceTotal: 67 * 10,
-//   totalAmount: 67 * 10, //bill amount+additionalExpenses
-//   additionalExpenses: [],
-// };
-// const signUpSubmitHandler = (values, resetForm) => {
-//   console.log({ values });
-//   if (
-//     checkingIfAlreadyUser(signUpStore, values.email, values.phoneNumber) ==
-//     "nothing"
-//   ) {
-//     console.log("user doesnt exist");
-
-//     const payload = {
-//       ...values,
-//       userId: getRandom(13),
-//       pendingBills: [
-//         {
-//           ...samplePendingBill,
-//         },
-//       ],
-//       paidBills: [],
-//     };
-//     setUserId(payload.userId);
-//     dispatcher(signUpReducers.signupButtonHandlerReducer(payload));
-//     resetForm();
-//     setshowSignUpModal(true);
-//   } else {
-//     toast.error(
-//       `User exist with the given ${checkingIfAlreadyUser(
-//         signUpStore,
-//         values.email,
-//         values.phoneNumber
-//       )}`,
-//       toastConfig
-//     );
-//   }
-// };
-
-//complaintRegister.jsx
-// function getRandom(length) {
-//   return Math.floor(
-//     Math.pow(10, length - 1) +
-//       Math.random() * 9 * Math.pow(10, length - 1).toString()
-//   );
-// }
-
-// const complaintRegisteredSubmtHandler = (values) => {
-//   const payload = {
-//     userId: values.complaintUserId,
-//     complaintDetails: {
-//       complaintId: getRandom(5),
-//       complaintStatus: "Pending",
-//       category: values.complaintCategory,
-//       subCategory: values.complaintSubCategory,
-//       problemDescription: values.problemDescription,
-//       contactPersonName: values.contactPersonName,
-//       contactPersonNumber: values.contactPersonNumber,
-//       complaintAddress: values.complaintAddress,
-//       complaintAddressLandmark: values.complaintAddressLandmark,
-//     },
-//   };
-//   setuniqueComplaintId(payload.complaintDetails.complaintId);
-//   dispatcher(complaintReducers.addComplaint(payload));
-//   setshowComplaintRegisteredModal(true);
-// };

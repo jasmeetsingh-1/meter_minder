@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import "./ModalsCssFiles/paymentModal.css";
+import "../modals/ModalsCssFiles/paymentModal.css";
 import Lottie from "lottie-react";
 import paymentAnnimation from "../../assets/animations/arrowPaymentAnnimation.json";
 import { Formik, Form, Field } from "formik";
@@ -8,12 +8,15 @@ import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import backButton from "../../assets/back-svgrepo-com.svg";
+import { useDispatch } from "react-redux";
+import { loginReducers } from "../redux-store/store";
 
 function PaymentModal({ showModal, onHide, showPaymentModal }) {
   const [paymentOption, setPaymentOption] = useState("none");
   const [otpButtonClicked, setotpButtonClicked] = useState(false);
   const [otpValue, setOtpValue] = useState();
   const [otpValidated, setotpvalidated] = useState(false);
+  const dispatcher = useDispatch();
 
   useEffect(() => {
     setPaymentOption("none");
@@ -398,6 +401,7 @@ function PaymentModal({ showModal, onHide, showPaymentModal }) {
                                 onClick={(e) => {
                                   e.preventDefault();
                                   showPaymentModal();
+                                  dispatcher(loginReducers.billPaidHandler());
                                 }}
                               >
                                 Pay

@@ -10,7 +10,7 @@ import copyLogo from "../../assets/copy-svgrepo-com.svg";
 function SignupModal({ showModal, onHide, loginButtonClicked, userId }) {
   const toastConfig = {
     position: "bottom-right",
-    autoClose: 3000,
+    autoClose: 1000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -18,6 +18,7 @@ function SignupModal({ showModal, onHide, loginButtonClicked, userId }) {
     progress: undefined,
     theme: "dark",
   };
+
   return (
     <>
       <Modal
@@ -36,15 +37,14 @@ function SignupModal({ showModal, onHide, loginButtonClicked, userId }) {
               width="50px"
               className="img-fluid"
               alt="website-logo"
-              title="meterMinder"
+              title="KSEB"
             />
-            <h1>Meter Minder</h1>
+            <h1>KSEB</h1>
           </div>
           <p className="signup-modal-heading">Sign Up Successful</p>
           <div className="signup-modal-content">
             <span>
-              Welcome to Meter Minder! Kindly note down the user Id for future
-              logins.
+              Welcome to KSEB! Kindly note down the user Id for future logins.
             </span>
             <div className="signup-modal-userId-holder">
               User id:{" "}
@@ -57,6 +57,8 @@ function SignupModal({ showModal, onHide, loginButtonClicked, userId }) {
                   {userId}
                   <img
                     src={copyLogo}
+                    alt="copylogo"
+                    title="copylogo"
                     width="15px"
                     style={{ marginLeft: "4px", marginBottom: "2px" }}
                   />

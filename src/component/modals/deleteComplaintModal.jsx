@@ -1,10 +1,17 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
-import Lottie from "lottie-react";
 import "./ModalsCssFiles/deleteComplaintModal.css";
 import deleteWarning from "../../assets/warning-svg.svg";
+import { useDispatch } from "react-redux";
+import { complaintReducers } from "../redux-store/store";
 
-function DeleteComplaintModal({ showModal, onHide, complaintDeletedHandler }) {
+function DeleteComplaintModal({
+  showModal,
+  onHide,
+  complaintDeletedHandler,
+  complaintIDToDelete,
+}) {
+  const dispatcher = useDispatch();
   return (
     <Modal
       show={showModal}
@@ -19,7 +26,7 @@ function DeleteComplaintModal({ showModal, onHide, complaintDeletedHandler }) {
       ></Modal.Header>
       <Modal.Body className="modal-body-deleteComplaint">
         <div className="heading-div-deleteComplaint-modal">
-          Delete Complaint #123
+          Delete Complaint #{complaintIDToDelete}
         </div>
 
         <p className="delete-modal-heading">
@@ -27,7 +34,12 @@ function DeleteComplaintModal({ showModal, onHide, complaintDeletedHandler }) {
         </p>
         <div className="warning-div-deleteComplaint">
           <div>
-            <img src={deleteWarning} width="17px" />
+            <img
+              src={deleteWarning}
+              width="17px"
+              alt="delete warning"
+              title="delete warning"
+            />
             Warning
           </div>
           <div>You will not be able to undo the action.</div>
@@ -46,6 +58,7 @@ function DeleteComplaintModal({ showModal, onHide, complaintDeletedHandler }) {
             onClick={(e) => {
               e.preventDefault();
               complaintDeletedHandler();
+              dispatcher(complaintReducers.clearComplaintData());
               onHide();
             }}
           >

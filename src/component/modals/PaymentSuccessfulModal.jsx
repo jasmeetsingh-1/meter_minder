@@ -3,10 +3,8 @@ import { Modal } from "react-bootstrap";
 import Lottie from "lottie-react";
 import paymentSuccessful from "../../assets/animations/paymentSuccessful.json";
 import "./ModalsCssFiles/paymentSuccessfulModal.css";
-import { useNavigate } from "react-router";
 
 function PaymentSuccessfullModal({ showModal, onHide, setmenuSelected }) {
-  const navigate = useNavigate();
   return (
     <>
       <Modal show={showModal} onHide={onHide}>
@@ -29,6 +27,7 @@ function PaymentSuccessfullModal({ showModal, onHide, setmenuSelected }) {
           <div className="login-button-holder">
             <button
               className="btn signup-form-loginButton"
+              style={{ display: "flex", justifyContent: "center" }}
               onClick={() => {
                 onHide();
                 setmenuSelected(1);

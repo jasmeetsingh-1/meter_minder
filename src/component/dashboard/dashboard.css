@@ -93,11 +93,18 @@
   height: 300px;
   background-color: white;
   border-radius: 20px;
+  /* display: flex;
+  justify-content: center;
+  align-content: center; */
+  overflow: auto;
+  flex-wrap: wrap;
+  /* padding: 2rem; */
+}
+
+.yearly-chart-holder-dashboard {
   display: flex;
   justify-content: center;
-  align-content: center;
-  flex-wrap: wrap;
-  padding: 2rem;
+  align-items: center;
 }
 
 .yearly-chart-holder-dashboard {
@@ -122,12 +129,17 @@
   font-size: large;
   font-weight: 700;
 }
+
 .monthly-expenses-holder {
   padding: 2rem 1rem;
   display: flex;
   justify-content: space-around;
   border: 0.5px solid lightgrey;
   border-radius: 20px;
+}
+
+.monthly-expenses-holder span:nth-child(1) {
+  min-width: 100px;
 }
 
 .monthly-expenses-holder span:nth-child(2),
