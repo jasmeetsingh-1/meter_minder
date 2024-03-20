@@ -12,7 +12,7 @@ function Header({ heading }) {
     if (!userData.isloggedIn) {
       navigate("/login");
     }
-  }, [userData]);
+  }, [userData, navigate]);
   return (
     <>
       <div className="dashboard-holder">

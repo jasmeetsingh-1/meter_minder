@@ -63,6 +63,8 @@ function ComplaintRegisteredModal({
                 >
                   {uniqueComplaintId}
                   <img
+                    alt="copylogo"
+                    title="copylogo"
                     src={copyLogo}
                     width="15px"
                     style={{ marginLeft: "4px", marginBottom: "2px" }}
