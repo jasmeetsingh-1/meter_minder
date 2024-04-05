@@ -495,6 +495,15 @@ function ComplaintRegister(props) {
               <div className="row text-center">
                 <div className="col-12 register-complaint-button-holder">
                   <button
+                    type="submit"
+                    className="btn btn-primary register-complaint-buttons"
+                    onClick={() => {
+                      console.log("submit button clicked");
+                    }}
+                  >
+                    Submit Complaint
+                  </button>
+                  <button
                     className="btn btn-secondary register-complaint-buttons"
                     onClick={(e) => {
                       e.preventDefault();
@@ -502,14 +511,6 @@ function ComplaintRegister(props) {
                     }}
                   >
                     Cancel
-                  </button>
-                  <button
-                    className="btn btn-primary register-complaint-buttons"
-                    onClick={() => {
-                      console.log(formik.errors);
-                    }}
-                  >
-                    Submit Complaint
                   </button>
                 </div>
               </div>

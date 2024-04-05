@@ -39,10 +39,14 @@ textarea {
 .register-complaint-button-holder {
   display: flex;
   justify-content: center;
+  flex-direction: row-reverse;
   gap: 2rem;
   margin-top: 2.5rem;
 }
 
+.register-complaint-button-holder > button {
+  min-width: 10rem;
+}
 .register-complaint-buttons {
   font-size: small !important;
 }
