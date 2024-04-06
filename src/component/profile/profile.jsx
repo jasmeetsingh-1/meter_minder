@@ -5,10 +5,13 @@ import * as Yup from "yup";
 import "./profile.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch, useSelector } from "react-redux";
+import { signUpReducers } from "../redux-store/store";
 
 function Profile() {
   // const { submitForm } = useFormikContext();
-
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.loginStore);
   const [editingForm, setEditingForm] = useState(false);
   const [passwordChanging, setPasswordChanging] = useState(false);
 
@@ -24,13 +27,13 @@ function Profile() {
   };
 
   const initialEditProfileValues = {
-    userId: "132457891234",
-    name: "Rovy Michael varghese",
-    address: "lalitpur branch",
-    contactNo: "9877998276",
-    email: "rovy@gmail.com",
-    password: "123456789",
-    confirmPassword: "123456789",
+    userId: userData.data.userId,
+    name: userData.data.customerName,
+    address: userData.data.address,
+    contactNo: userData.data.phoneNumber,
+    email: userData.data.email,
+    password: userData.data.password,
+    confirmPassword: userData.data.password,
   };
 
   const editProfileValidation = Yup.object({
@@ -40,7 +43,6 @@ function Profile() {
       .email("Enter valid Email")
       .required("Please enter email"),
     contactNo: Yup.string().required("Please enter your phone Number"),
-    // countryCode: Yup.string().required("Please choose your country code"),
     address: Yup.string().required("Please enter your address"),
     password: Yup.string()
       .required("Please enter password")
@@ -64,7 +66,11 @@ function Profile() {
       return;
     }
     console.log("form submitted");
-    console.log({ values });
+    dispatch(
+      signUpReducers.editProfileHandler({
+        ...values,
+      })
+    );
     toast.success("Details updated successfully", toastConfig);
   };
 

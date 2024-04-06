@@ -62,6 +62,23 @@ const SignUpSlice = createSlice({
       };
       state.signupdata = [...state.signupdata, newSignUp];
     },
+    editProfileHandler(state, action) {
+      console.log("action payload >>>", action.payload);
+      const indexOFItem = state.signupdata.findIndex(
+        (item) => item.userId === action.payload.userId
+      );
+      const newSignUpData = {
+        ...state.signupdata[indexOFItem],
+        address: action.payload.address,
+        password: action.payload.password,
+        name: action.payload.name,
+        email: action.payload.email,
+        phoneNumber: action.payload.contactNo,
+      };
+      const newSignUp = [...state.signupdata];
+      newSignUp[indexOFItem] = newSignUpData;
+      state.signupdata = newSignUp;
+    },
   },
 });
 
@@ -70,9 +87,6 @@ const ComplaintSlice = createSlice({
   initialState: complaintInitials,
   reducers: {
     addComplaint(state, action) {
-      //now check if object with the action.payload.userId exist
-      //then update the array , either enter new one
-
       const indexOFItem = state.complaintData.findIndex(
         (item) => item.userId === action.payload.userId
       );

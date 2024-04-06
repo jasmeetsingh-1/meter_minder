@@ -48,8 +48,8 @@
   /* align-items: center; */
   gap: 1rem;
   color: #a3aed0;
-  font-size: large;
-  cursor: pointer;
+  font-size: medium;
+  cursor: default;
   font-weight: 500;
   /* border-right: 5px solid #4318FF; */
   /* border-top-right-radius: 10px; */
