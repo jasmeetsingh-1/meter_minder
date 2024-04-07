@@ -11,6 +11,7 @@ import { signUpReducers } from "../redux-store/store";
 function Profile() {
   // const { submitForm } = useFormikContext();
   const dispatch = useDispatch();
+  const signUpData = useSelector((state) => state.signupStore.signupdata);
   const userData = useSelector((state) => state.loginStore);
   const [editingForm, setEditingForm] = useState(false);
   const [passwordChanging, setPasswordChanging] = useState(false);
@@ -52,12 +53,16 @@ function Profile() {
   });
 
   const alreadyInDB = (emailValue) => {
-    if (emailValue === "rovy123@gmail.com") return true;
-    return false;
+    let flag = false;
+    signUpData.forEach((item) => {
+      if (item.email === emailValue) flag = true;
+      return;
+    });
+    return flag;
   };
 
   const myProfileSubmitHandler = (values) => {
-    if (alreadyInDB(values.email)) {
+    if (alreadyInDB(values.email) && values.email !== userData.data.email) {
       toast.error("Email already taken by user", toastConfig);
       return;
     }
@@ -71,10 +76,9 @@ function Profile() {
         ...values,
       })
     );
-    toast.success("Details updated successfully", toastConfig);
+    toast.success("Re-login to see the changes", toastConfig);
+    // toast.success("Details updated successfully", toastConfig);
   };
-
-  //  Calling an API
 
   return (
     <>

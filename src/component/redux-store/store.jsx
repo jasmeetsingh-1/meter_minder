@@ -28,6 +28,7 @@ const LoginSlice = createSlice({
       state.isloggedIn = action.payload.status;
       state.data = action.payload.userdata;
     },
+
     logoutButtonHandler(state) {
       state.isloggedIn = false;
       state.data = {};
