@@ -38,14 +38,7 @@ function PayBill({ setmenuSelected }) {
           </div>
         </div>
       </div>
-      <div
-        className="header-paybill"
-        style={{
-          justifyContent: "flex-start",
-          alignItems: "center",
-          fontSize: "x-large",
-        }}
-      >
+      <div className="header-paybill extra-header-payBill">
         <span style={{ color: "blue", fontWeight: "bolder" }}>₹8424</span>{" "}
         &nbsp;dues on 15 Aug, 2023
       </div>

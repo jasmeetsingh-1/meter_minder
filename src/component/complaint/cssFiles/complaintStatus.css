@@ -6,3 +6,12 @@
 .bills-fileds {
   border: none;
 }
+
+@media screen and (max-width:800px) {
+  .delete-button{
+    max-width: 5rem;
+  }
+  .complaint-table{
+    font-size: smaller;
+  }
+}

@@ -31,3 +31,10 @@ html {
   padding: 1rem;
   min-height: 100vh;
 }
+
+
+@media screen and (max-width:800px) {
+  .website-main-component-holder {
+    width: 100%;
+  }
+}

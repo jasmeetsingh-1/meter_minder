@@ -17,6 +17,12 @@
   font-weight: 600;
 }
 
+.extra-header-payBill{
+  font-family: DM sans;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: x-large;
+}
 .card-paybill {
   border-radius: 20px;
   width: 49%;
@@ -83,3 +89,24 @@
   gap: 1rem;
   justify-content: center;
 }
+
+@media screen and (max-width:800px) {
+  .card-paybill{
+    width: 100%;
+  }  
+  .extra-header-payBill{
+    font-size: large;
+  }
+  .cost-table-holder-paybill {
+    width: 92%;
+  }
+  .header-paybill{
+    justify-content: space-between;
+  }
+  .header-paybill > div{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+

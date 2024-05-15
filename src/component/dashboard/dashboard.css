@@ -156,3 +156,33 @@
 .monthly-expenses-holder span:nth-child(4) {
   color: #a3aed0;
 }
+
+
+@media screen and (max-width:800px) {
+  .dashboard-holder{
+    justify-content: center;
+  }
+  .dashboard-card-holders{
+    flex-direction: column;
+    gap:0.5rem;
+  }
+  .card-dashboard{
+    justify-content: left;
+    width: 100%;
+    margin: 0;
+  }
+  .yearly-chart-holder-dashboard{
+    display: none;
+  }
+  .main-header-right-side-dashboard{
+    width: 100%;
+    margin-bottom: 10px;
+    justify-content: space-between;
+  }
+  .monthly-expenses-holder{
+    font-size: smaller;
+  }
+  .monthly-expenses-holder span:nth-child(1) {
+    min-width: min-content;
+  }
+}

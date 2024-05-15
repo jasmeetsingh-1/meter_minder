@@ -13,7 +13,7 @@ import Profile from "./component/profile/profile";
 import ContactUs from "./component/contactUs/contactUs";
 
 function App() {
-  const [menuSelected, setmenuSelected] = useState(5);
+  const [menuSelected, setmenuSelected] = useState(1);
   const navigate = useNavigate();
   const allData = useSelector((state) => state.loginStore);
 

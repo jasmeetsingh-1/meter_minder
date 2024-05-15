@@ -76,3 +76,9 @@
   outline: none;
   border: none;
 }
+
+@media screen and (max-width: 800px){
+  .sidebar-holder{ 
+    display: none;
+  }
+}

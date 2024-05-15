@@ -36,7 +36,7 @@ function ComplaintStatus() {
         <div className="card shadow-lg">
           <div className="container view-bil-form mt-4 my-4">
             <form>
-              <table className="table">
+              <table className="table complaint-table">
                 <thead className="table-dark">
                   <tr>
                     <th scope="col">Si No:</th>
@@ -58,7 +58,7 @@ function ComplaintStatus() {
                             <td>{item.complaintStatus}</td>
                             <td>
                               <button
-                                className="btn  btn-danger"
+                                className="btn  btn-danger delete-button"
                                 onClick={(e) => {
                                   setShowDeleteComplaintModal(true);
                                   setcomplaintIDToDelete(item.complaintId);
