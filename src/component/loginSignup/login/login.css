@@ -155,3 +155,31 @@ a {
   width: 25%;
   border: none;
 }
+
+
+@media screen and (max-width:800px) {
+  .loginPage-holder-css{
+    flex-direction: column-reverse;
+    height: 100vh;
+  }
+  .right-side{
+    max-height: 7rem;
+  }
+  .login-page-part-css{
+    flex-grow: 1;
+    padding: 0 20px;
+  }
+  .signUp-form-holder{
+    flex-grow: 1;
+    padding: 0px 20px;
+  }
+  .login-form-holder-css{
+    width: 100%;
+  }
+  .formik-holder-css{
+    max-width: 100%;
+  }
+  .login-form-heading-holder{
+    width: 100%;
+  }
+}
