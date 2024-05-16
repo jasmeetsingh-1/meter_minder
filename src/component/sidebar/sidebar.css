@@ -80,5 +80,8 @@
 @media screen and (max-width: 800px){
   .sidebar-holder{ 
     display: none;
+   box-shadow: 0px 5px 20px 1px;
+        width: 70%;
+        border-radius: 0 10px 20px 0;
   }
 }
